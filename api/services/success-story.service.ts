@@ -34,4 +34,6 @@ class SuccessStoryService {
   }
 }
 
-export default new SuccessStoryService()
+const successStoryService = new SuccessStoryService()
+export { successStoryService }
+export default successStoryService

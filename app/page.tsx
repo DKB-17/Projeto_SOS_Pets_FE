@@ -1,48 +1,14 @@
+"use client"
+
 import { Navigation } from "@/components/navigation"
-import { NewsCard } from "@/components/news-card"
+import { PostCard } from "@/components/news-card"
 import { Button } from "@/components/ui/button"
 import { Heart, Users, DollarSign } from "lucide-react"
-
-const newsItems = [
-  {
-    id: 1,
-    title: "Successful Adoption Drive in Downtown",
-    description:
-      "Last weekend's adoption event was a huge success! We helped 12 rescued pets find their forever homes. Thank you to all the volunteers and adopters who made this possible.",
-    date: "March 15, 2024",
-    type: "news" as const,
-    image: "/happy-adopted-dogs-with-families.jpg",
-  },
-  {
-    id: 2,
-    title: "Upcoming Vaccination Camp",
-    description:
-      "Join us on April 5th for a free vaccination camp for rescued animals. Our partner veterinarians will be providing essential vaccines and health checkups.",
-    date: "April 5, 2024",
-    type: "event" as const,
-    image: "/veterinarian-with-pets.jpg",
-  },
-  {
-    id: 3,
-    title: "New Partnership with City Vet Clinic",
-    description:
-      "We're excited to announce our partnership with City Vet Clinic, who will be providing discounted medical care for all our rescued animals.",
-    date: "March 10, 2024",
-    type: "news" as const,
-    image: "/veterinary-clinic-exterior.png",
-  },
-  {
-    id: 4,
-    title: "Volunteer Training Workshop",
-    description:
-      "Learn how to care for rescued animals and become part of our volunteer network. Workshop scheduled for April 12th at Community Center.",
-    date: "April 12, 2024",
-    type: "event" as const,
-    image: "/people-training-with-animals.jpg",
-  },
-]
+import { usePosts } from "@/api/hooks/usePosts"
 
 export default function HomePage() {
+  const { posts, loading, error } = usePosts()
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -108,9 +74,31 @@ export default function HomePage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {newsItems.map((item) => (
-                <NewsCard key={item.id} {...item} />
-              ))}
+              {loading ? (
+                <div className="col-span-full text-center py-8">
+                  <p className="text-muted-foreground">Loading posts...</p>
+                </div>
+              ) : error ? (
+                <div className="col-span-full text-center py-8">
+                  <p className="text-red-500">Error loading posts. Please try again later.</p>
+                </div>
+              ) : posts.length === 0 ? (
+                <div className="col-span-full text-center py-8">
+                  <p className="text-muted-foreground">No posts available yet.</p>
+                </div>
+              ) : (
+                posts.map((post) => (
+                  <PostCard
+                    key={post.id}
+                    id={post.id ? post.id : 0}
+                    title={post.title}
+                    text={post.text}
+                    date={post.date || new Date().toLocaleDateString()}
+                    category={post.category}
+                    images={post.images ? post.images : undefined}
+                  />
+                ))
+              )}
             </div>
           </div>
         </div>

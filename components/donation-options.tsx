@@ -46,7 +46,9 @@ export function DonationOptions() {
                   setSelectedAmount(amount)
                   setCustomAmount("")
                 }}
-                className="bg-transparent"
+                className={cn(
+                  selectedAmount === amount && !customAmount ? "bg-primary text-primary-foreground" : "bg-transparent",
+                )}
               >
                 ${amount}
               </Button>

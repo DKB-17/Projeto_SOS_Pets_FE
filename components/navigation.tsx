@@ -4,16 +4,38 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Heart } from "lucide-react"
+import { useEffect, useState } from "react"
+import { getAuthToken } from "@/api/utils/auth"
 
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/success-stories", label: "Success Stories" },
-  { href: "/social-media", label: "Social Media" },
   { href: "/contact", label: "Contact & Donate" },
+  { href: "/login", label: "Login" },
+]
+
+const authNavItems = [
+  { href: "/", label: "Home" },
+  { href: "/success-stories", label: "Success Stories" },
+  { href: "/contact", label: "Contact & Donate" },
+  { href: "/management", label: "Management" },
+  { href: "/login", label: "Logout" },
 ]
 
 export function Navigation() {
   const pathname = usePathname()
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    const token = getAuthToken()
+    setIsAuthenticated(!!token)
+  }, [pathname])
+
+  const items = isAuthenticated ? authNavItems : navItems
+
+  if (!mounted) return null
 
   return (
     <nav className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
@@ -25,7 +47,7 @@ export function Navigation() {
           </Link>
 
           <div className="flex items-center gap-6">
-            {navItems.map((item) => (
+            {items.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}

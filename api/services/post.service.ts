@@ -10,6 +10,7 @@ class PostService {
 
   async getPosts(): Promise<PostRequestDto[]> {
     const response = await this.api.get<PostRequestDto[]>("/posts")
+    console.log("Fetched posts:", response.data);
     return response.data
   }
 
@@ -34,4 +35,6 @@ class PostService {
   }
 }
 
-export default new PostService()
+const postService = new PostService()
+export { postService }
+export default postService
