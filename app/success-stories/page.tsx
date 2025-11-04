@@ -20,10 +20,10 @@ export default function SuccessStoriesPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-6">
               <Heart className="w-8 h-8 fill-primary" />
             </div>
-            <h1 className="text-4xl font-bold text-foreground mb-4 text-balance">Success Stories</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-4 text-balance">Casos de sucesso</h1>
             <p className="text-lg text-muted-foreground leading-relaxed text-pretty">
-              Every adoption is a beautiful story of second chances and unconditional love. Read about the amazing
-              journeys of our rescued pets and their new families.
+              Toda adoção é uma linda história de segundas chances e amor incondicional. 
+              Leia sobre as incríveis histórias de nossos animais resgatados e suas novas famílias.
             </p>
           </div>
         </div>
@@ -63,14 +63,14 @@ export default function SuccessStoriesPage() {
 
             {/* Call to Action */}
             <div className="bg-accent rounded-xl p-8 text-center">
-              <h3 className="text-2xl font-bold text-foreground mb-3">Want to Share Your Story?</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-3">Quer Compartilhar Sua História?</h3>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                If you've adopted a pet through our organization, we'd love to hear about your journey and share it with
-                our community.
+                Se você adotou um animal de estimação por meio de nossa organização, gostaríamos 
+                muito de ouvir sobre sua jornada e compartilhá-la com nossa comunidade.
               </p>
               <Button size="lg" className="gap-2">
                 <Heart className="w-5 h-5" />
-                Submit Your Story
+                Envie sua história
               </Button>
             </div>
           </div>

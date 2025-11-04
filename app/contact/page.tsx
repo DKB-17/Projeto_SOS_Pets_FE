@@ -14,9 +14,9 @@ export default function ContactPage() {
       <section className="bg-gradient-to-b from-accent to-background py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl font-bold text-foreground mb-4 text-balance">Get in Touch</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-4 text-balance">Entre em Contato</h1>
             <p className="text-lg text-muted-foreground leading-relaxed text-pretty">
-              Have questions about adoption, volunteering, or donations? We're here to help!
+              Tem dúvidas sobre adoção, voluntariado ou doações? Estamos aqui para ajudar!
             </p>
           </div>
         </div>
@@ -44,7 +44,7 @@ export default function ContactPage() {
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                       <Phone className="w-6 h-6 text-primary" />
                     </div>
-                    <h3 className="font-semibold">Phone</h3>
+                    <h3 className="font-semibold">Telefone</h3>
                     <p className="text-sm text-muted-foreground">(555) 123-4567</p>
                   </div>
                 </CardContent>
@@ -55,7 +55,7 @@ export default function ContactPage() {
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                       <MapPin className="w-6 h-6 text-primary" />
                     </div>
-                    <h3 className="font-semibold">Address</h3>
+                    <h3 className="font-semibold">Endereço</h3>
                     <p className="text-sm text-muted-foreground">123 Rescue Lane, City, ST 12345</p>
                   </div>
                 </CardContent>
@@ -66,8 +66,8 @@ export default function ContactPage() {
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                       <Clock className="w-6 h-6 text-primary" />
                     </div>
-                    <h3 className="font-semibold">Hours</h3>
-                    <p className="text-sm text-muted-foreground">Mon-Sat: 9AM-6PM</p>
+                    <h3 className="font-semibold">Funcionamento</h3>
+                    <p className="text-sm text-muted-foreground">Segunda á Sexta: 9AM-6PM</p>
                   </div>
                 </CardContent>
               </Card>
@@ -126,27 +126,27 @@ export default function ContactPage() {
 
               <Card>
                 <CardContent className="pt-6">
-                  <h3 className="font-semibold text-lg mb-4">Other Ways to Help</h3>
+                  <h3 className="font-semibold text-lg mb-4">Outras Formas de Ajudar</h3>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     <li className="flex items-start gap-2">
                       <span className="text-primary mt-1">•</span>
-                      <span>Volunteer at our adoption events</span>
+                      <span>Voluntário em nossos eventos de adoção</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-primary mt-1">•</span>
-                      <span>Foster a pet temporarily</span>
+                      <span>Seja abrigo um animal de estimação temporariamente</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-primary mt-1">•</span>
-                      <span>Donate supplies (food, toys, blankets)</span>
+                      <span>Doe suprimentos (alimentos, brinquedos, cobertores)</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-primary mt-1">•</span>
-                      <span>Share our posts on social media</span>
+                      <span>Compartilhe nossas postagens nas redes sociais</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-primary mt-1">•</span>
-                      <span>Sponsor a pet's medical care</span>
+                      <span>Patrocine os cuidados médicos de um animal de estimação</span>
                     </li>
                   </ul>
                 </CardContent>
