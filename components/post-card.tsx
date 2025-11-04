@@ -9,7 +9,7 @@ export function PostCard({id, title, text, date, category, images }: PostRespons
     <Card className="overflow-hidden hover:shadow-lg transition-shadow">
       {images && (
         <div className="aspect-video w-full overflow-hidden bg-muted">
-          <img src={images[0].path || "/placeholder.svg"} alt={title} className="w-full h-full object-cover" />
+          <img src={images != null ? images[0].path : "/placeholder.svg"} alt={title} className="w-full h-full object-cover" />
         </div>
       )}
       <CardHeader>

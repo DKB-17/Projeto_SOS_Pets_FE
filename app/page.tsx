@@ -1,7 +1,7 @@
 "use client"
 
 import { Navigation } from "@/components/navigation"
-import { PostCard } from "@/components/news-card"
+import { PostCard } from "@/components/post-card"
 import { Button } from "@/components/ui/button"
 import { Heart, Users, DollarSign } from "lucide-react"
 import { usePosts } from "@/api/hooks/usePosts"
