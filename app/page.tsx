@@ -51,18 +51,16 @@ export default function HomePage() {
       <section className="relative bg-gradient-to-b from-accent to-background py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-5xl font-bold text-foreground mb-6 text-balance">Every Pet Deserves a Loving Home</h1>
+            <h1 className="text-5xl font-bold text-foreground mb-6 text-balance">Todo animal de estimação merece um lar amoroso</h1>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed text-pretty">
-              We connect rescued animals with caring families through community support, volunteer networks, and
-              compassionate care. Together, we make a difference.
+              Nossa missão é unir corações. Com a ajuda da comunidade e de voluntários incríveis, 
+              encontramos lares cheios de amor para animais resgatados, cuidando de cada um com 
+              muito carinho. Juntos, transformamos a vida deles e a nossa.
             </p>
             <div className="flex items-center justify-center gap-4">
               <Button size="lg" className="gap-2">
                 <Heart className="w-5 h-5" />
-                Donate Now
-              </Button>
-              <Button size="lg" variant="outline">
-                Become a Volunteer
+                Doe agora
               </Button>
             </div>
           </div>
@@ -98,13 +96,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* News & Events Section */}
+      {/* Evntos e novidades */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-foreground mb-3">Latest News & Events</h2>
-              <p className="text-muted-foreground">Stay updated with our rescue efforts and upcoming activities</p>
+              <h2 className="text-3xl font-bold text-foreground mb-3">Últimas notícias e eventos</h2>
+              <p className="text-muted-foreground">Acompanhe de perto a nossa jornada! Siga-nos para conhecer as histórias emocionantes dos nossos resgates e fique por dentro de todas as novidades.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
