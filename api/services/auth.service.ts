@@ -1,7 +1,7 @@
 import axios from "axios"
 import { setAuthToken, getAuthToken } from "../utils/auth"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api"
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080"
 
 interface LoginRequest {
   email: string
