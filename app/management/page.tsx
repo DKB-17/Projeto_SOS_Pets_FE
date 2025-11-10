@@ -40,12 +40,12 @@ export default function ManagementPage() {
       <section className="py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h1 className="text-4xl font-bold text-foreground mb-8">Management Dashboard</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-8">Painel de gerenciamento</h1>
 
             <Tabs defaultValue="posts" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="posts">Posts</TabsTrigger>
-                <TabsTrigger value="stories">Success Stories</TabsTrigger>
+                <TabsTrigger value="stories">Histórias de sucesso</TabsTrigger>
               </TabsList>
 
               <TabsContent value="posts">
@@ -120,7 +120,7 @@ function PostsManagement() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="title">Title</Label>
+            <Label htmlFor="title">Título</Label>
             <Input
               id="title"
               value={formData.title}
@@ -129,7 +129,7 @@ function PostsManagement() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="text">Content</Label>
+            <Label htmlFor="text">Conteúdo</Label>
             <textarea
               id="text"
               value={formData.text}
@@ -146,7 +146,7 @@ function PostsManagement() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Posts List</CardTitle>
+          <CardTitle>Lista de posts</CardTitle>
         </CardHeader>
         <CardContent>
           {loading ? (
@@ -231,13 +231,13 @@ function StoriesManagement() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Plus className="w-5 h-5" />
-            Create New Story
+            Criar novo Story
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="petName">Pet Name</Label>
+              <Label htmlFor="petName">Nome do animal</Label>
               <Input
                 id="petName"
                 value={formData.petName}
@@ -246,7 +246,7 @@ function StoriesManagement() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="ownerName">Owner Name</Label>
+              <Label htmlFor="ownerName">Nome da proprietária</Label>
               <Input
                 id="ownerName"
                 value={formData.ownerName}
@@ -267,7 +267,7 @@ function StoriesManagement() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="adoptionDate">Adoption Date</Label>
+              <Label htmlFor="adoptionDate">Data da adoção</Label>
               <Input
                 id="adoptionDate"
                 value={formData.adoptionDate}
@@ -276,7 +276,7 @@ function StoriesManagement() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="petType">Pet Type</Label>
+              <Label htmlFor="petType">Tipo do animal</Label>
               <Input
                 id="petType"
                 value={formData.petType}
@@ -293,7 +293,7 @@ function StoriesManagement() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Stories List</CardTitle>
+          <CardTitle>Lista de storys</CardTitle>
         </CardHeader>
         <CardContent>
           {loading ? (

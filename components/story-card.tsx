@@ -18,7 +18,7 @@ export function StoryCard({ petName, ownerName, story, adoptionDate, image, vide
       <div className="aspect-video w-full overflow-hidden bg-muted relative">
         {videoUrl ? (
           <video src={videoUrl} controls className="w-full h-full object-cover">
-            Your browser does not support the video tag.
+            Seu navegador não suporta a tag de vídeo.
           </video>
         ) : (
           <img src={image || "/placeholder.svg"} alt={petName} className="w-full h-full object-cover" />
@@ -40,7 +40,7 @@ export function StoryCard({ petName, ownerName, story, adoptionDate, image, vide
             <span>{adoptionDate}</span>
           </div>
         </div>
-        <CardTitle className="text-lg">Adopted by {ownerName}</CardTitle>
+        <CardTitle className="text-lg">Adotado por {ownerName}</CardTitle>
       </CardHeader>
       <CardContent>
         <CardDescription className="text-sm leading-relaxed">{story}</CardDescription>

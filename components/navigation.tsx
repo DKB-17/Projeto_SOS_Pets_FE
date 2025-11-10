@@ -43,7 +43,7 @@ export function Navigation() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2 font-semibold text-lg">
             <Heart className="w-6 h-6 text-primary fill-primary" />
-            <span className="text-foreground">Paws & Hearts</span>
+            <span className="text-foreground">SOS Pets</span>
           </Link>
 
           <div className="flex items-center gap-6">

@@ -15,7 +15,6 @@ export function DonationOptions() {
   const handleDonate = () => {
     const amount = customAmount || selectedAmount
     console.log("[v0] Donation initiated:", amount)
-    // In a real app, this would redirect to payment processor
     alert(`Thank you for your donation of $${amount}!`)
   }
 
@@ -24,18 +23,18 @@ export function DonationOptions() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Heart className="w-5 h-5 text-primary" />
-          Make a Donation
+          Faça uma doação
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         <p className="text-sm text-muted-foreground">
-          Your donation helps us rescue, rehabilitate, and find loving homes for animals in need. Every contribution
-          makes a difference!
+          Sua doação nos ajuda a resgatar, reabilitar e encontrar lares amorosos para animais necessitados. 
+          Cada contribuição faz a diferença!
         </p>
 
         {/* Preset Amounts */}
         <div className="space-y-2">
-          <p className="text-sm font-medium">Select Amount</p>
+          <p className="text-sm font-medium">Selecione o valor</p>
           <div className="grid grid-cols-3 gap-2">
             {donationAmounts.map((amount) => (
               <Button
@@ -58,7 +57,7 @@ export function DonationOptions() {
 
         {/* Custom Amount */}
         <div className="space-y-2">
-          <p className="text-sm font-medium">Or Enter Custom Amount</p>
+          <p className="text-sm font-medium">Ou insira um valor personalizado</p>
           <div className="relative">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
             <input
@@ -84,11 +83,11 @@ export function DonationOptions() {
         {/* Donate Button */}
         <Button onClick={handleDonate} disabled={!selectedAmount && !customAmount} className="w-full gap-2" size="lg">
           <CreditCard className="w-4 h-4" />
-          Donate ${customAmount || selectedAmount || 0}
+          Doe ${customAmount || selectedAmount || 0}
         </Button>
 
         <p className="text-xs text-muted-foreground text-center">
-          Secure payment processing. Your donation is tax-deductible.
+          Processamento de pagamento seguro. Nenhum dado de cartão de crédito é armazenado em nossos servidores.
         </p>
       </CardContent>
     </Card>

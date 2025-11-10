@@ -41,28 +41,28 @@ export default function HomePage() {
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-3">
                 <Heart className="w-6 h-6" />
               </div>
-              <div className="text-3xl font-bold text-foreground mb-1">500+</div>
-              <div className="text-sm text-muted-foreground">Pets Rescued</div>
+              <div className="text-3xl font-bold text-foreground mb-1">+500</div>
+              <div className="text-sm text-muted-foreground">Animais resgatados</div>
             </div>
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-secondary/10 text-secondary mb-3">
                 <Users className="w-6 h-6" />
               </div>
-              <div className="text-3xl font-bold text-foreground mb-1">150+</div>
-              <div className="text-sm text-muted-foreground">Active Volunteers</div>
+              <div className="text-3xl font-bold text-foreground mb-1">+150</div>
+              <div className="text-sm text-muted-foreground">Voluntários ativos</div>
             </div>
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-3">
                 <DollarSign className="w-6 h-6" />
               </div>
-              <div className="text-3xl font-bold text-foreground mb-1">$50K+</div>
-              <div className="text-sm text-muted-foreground">Financial Support</div>
+              <div className="text-3xl font-bold text-foreground mb-1">+50mil</div>
+              <div className="text-sm text-muted-foreground">Suporte financeiro</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Evntos e novidades */}
+      {/* Eventos e novidades */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">

@@ -34,7 +34,7 @@ export default function ContactPage() {
                       <Mail className="w-6 h-6 text-primary" />
                     </div>
                     <h3 className="font-semibold">Email</h3>
-                    <p className="text-sm text-muted-foreground">info@petadoption.org</p>
+                    <p className="text-sm text-muted-foreground">https://www.sospetsassis.org</p>
                   </div>
                 </CardContent>
               </Card>
@@ -45,7 +45,7 @@ export default function ContactPage() {
                       <Phone className="w-6 h-6 text-primary" />
                     </div>
                     <h3 className="font-semibold">Telefone</h3>
-                    <p className="text-sm text-muted-foreground">(555) 123-4567</p>
+                    <p className="text-sm text-muted-foreground">(18) 99999-9999</p>
                   </div>
                 </CardContent>
               </Card>
@@ -56,7 +56,7 @@ export default function ContactPage() {
                       <MapPin className="w-6 h-6 text-primary" />
                     </div>
                     <h3 className="font-semibold">Endereço</h3>
-                    <p className="text-sm text-muted-foreground">123 Rescue Lane, City, ST 12345</p>
+                    <p className="text-sm text-muted-foreground">Assis/SP</p>
                   </div>
                 </CardContent>
               </Card>
@@ -67,7 +67,7 @@ export default function ContactPage() {
                       <Clock className="w-6 h-6 text-primary" />
                     </div>
                     <h3 className="font-semibold">Funcionamento</h3>
-                    <p className="text-sm text-muted-foreground">Segunda á Sexta: 9AM-6PM</p>
+                    <p className="text-sm text-muted-foreground">Segunda á Sexta: 9h-18h</p>
                   </div>
                 </CardContent>
               </Card>
@@ -99,11 +99,11 @@ export default function ContactPage() {
                 <CardContent className="pt-6">
                   <h3 className="font-semibold text-lg mb-4">Follow Us</h3>
                   <p className="text-sm text-muted-foreground mb-4">
-                    Stay updated with our latest rescues, adoption events, and success stories on social media.
+                    Fique por dentro dos nossos resgates mais recentes, eventos de adoção e histórias de sucesso nas redes sociais.
                   </p>
                   <div className="flex gap-3">
                     <a
-                      href="https://facebook.com"
+                      href="https://www.facebook.com/sospetsassis/?locale=pt_BR"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2 px-4 py-2 rounded-lg border hover:bg-accent transition-colors"
@@ -112,7 +112,7 @@ export default function ContactPage() {
                       <span className="text-sm font-medium">Facebook</span>
                     </a>
                     <a
-                      href="https://instagram.com"
+                      href="https://www.instagram.com/sos.pets"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2 px-4 py-2 rounded-lg border hover:bg-accent transition-colors"

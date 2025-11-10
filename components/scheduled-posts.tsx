@@ -35,12 +35,12 @@ export function ScheduledPosts() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Calendar className="w-5 h-5" />
-          Scheduled Posts
+          Postagens agendadas
         </CardTitle>
       </CardHeader>
       <CardContent>
         {mockScheduledPosts.length === 0 ? (
-          <p className="text-muted-foreground text-center py-8">No scheduled posts</p>
+          <p className="text-muted-foreground text-center py-8">Postagens não agendadas</p>
         ) : (
           <div className="space-y-4">
             {mockScheduledPosts.map((post) => (

@@ -6,9 +6,8 @@ import { Suspense } from "react"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Paws & Hearts - Pet Adoption NGO",
-  description: "Helping rescue animals find their forever homes through community support and compassion",
-  generator: "v0.app",
+  title: "SOS Pets",
+  description: "Ajudar animais resgatados a encontrarem seus lares eternos por meio do apoio e compaixão da comunidade"
 }
 
 export default function RootLayout({
