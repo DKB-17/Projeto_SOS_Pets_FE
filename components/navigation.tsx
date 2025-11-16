@@ -45,7 +45,7 @@ export function Navigation() {
             <img 
               src="/logo.jpg" 
               alt="SOS Pets" 
-              className="h-16 w-auto object-contain"    
+              className="h-10 w-auto object-contain"
             />
           </Link>
 
