@@ -8,17 +8,17 @@ import { useEffect, useState } from "react"
 import { getAuthToken } from "@/api/utils/auth"
 
 const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/success-stories", label: "Success Stories" },
-  { href: "/contact", label: "Contact & Donate" },
+  { href: "/", label: "Inicio" },
+  { href: "/success-stories", label: "Histórias de sucesso" },
+  { href: "/contact", label: "Contatos e Doações" },
   { href: "/login", label: "Login" },
 ]
 
 const authNavItems = [
-  { href: "/", label: "Home" },
-  { href: "/success-stories", label: "Success Stories" },
-  { href: "/contact", label: "Contact & Donate" },
-  { href: "/management", label: "Management" },
+  { href: "/", label: "Inicio" },
+  { href: "/success-stories", label: "Histórias de sucesso " },
+  { href: "/contact", label: "Contatos e Doações" },
+  { href: "/management", label: "Gerenciamento" },
   { href: "/login", label: "Logout" },
 ]
 

@@ -47,7 +47,7 @@ export default function LoginPage() {
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
                 <Heart className="w-8 h-8" />
               </div>
-              <h1 className="text-3xl font-bold text-foreground">Admin Login</h1>
+              <h1 className="text-3xl font-bold text-foreground">Login administrador</h1>
               <p className="text-muted-foreground mt-2">Access the management dashboard</p>
             </div>
 

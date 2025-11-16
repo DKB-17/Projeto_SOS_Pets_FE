@@ -115,7 +115,7 @@ function PostsManagement() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Plus className="w-5 h-5" />
-            Create New Post
+            Criar novo post
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -150,9 +150,9 @@ function PostsManagement() {
         </CardHeader>
         <CardContent>
           {loading ? (
-            <p className="text-muted-foreground">Loading...</p>
+            <p className="text-muted-foreground">Carregando...</p>
           ) : error ? (
-            <p className="text-red-500">Error loading posts</p>
+            <p className="text-red-500">Erro ao carregar posts</p>
           ) : (
             <div className="space-y-3">
               {posts.map((post) => (
@@ -231,7 +231,7 @@ function StoriesManagement() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Plus className="w-5 h-5" />
-            Criar novo Story
+            Criar nova história
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -256,7 +256,7 @@ function StoriesManagement() {
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="story">Story</Label>
+            <Label htmlFor="story">História</Label>
             <textarea
               id="story"
               value={formData.story}
@@ -293,20 +293,20 @@ function StoriesManagement() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Lista de storys</CardTitle>
+          <CardTitle>Lista de histórias</CardTitle>
         </CardHeader>
         <CardContent>
           {loading ? (
-            <p className="text-muted-foreground">Loading...</p>
+            <p className="text-muted-foreground">Carregando...</p>
           ) : error ? (
-            <p className="text-red-500">Error loading stories</p>
+            <p className="text-red-500">Erro ao carregar histórias</p>
           ) : (
             <div className="space-y-3">
               {stories.map((story) => (
                 <div key={story.id} className="flex items-center justify-between p-3 border rounded">
                   <div>
                     <h3 className="font-semibold">{story.petName}</h3>
-                    <p className="text-sm text-muted-foreground">Owner: {story.ownerName}</p>
+                    <p className="text-sm text-muted-foreground">Dono: {story.ownerName}</p>
                   </div>
                   <Button
                     variant="destructive"

@@ -24,10 +24,12 @@ export default function HomePage() {
               muito carinho. Juntos, transformamos a vida deles e a nossa.
             </p>
             <div className="flex items-center justify-center gap-4">
+              <a href="/contact">
               <Button size="lg" className="gap-2">
                 <Heart className="w-5 h-5" />
                 Doe agora
               </Button>
+              </a>
             </div>
           </div>
         </div>
