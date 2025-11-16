@@ -5,6 +5,9 @@ import { PostCard } from "@/components/post-card"
 import { Button } from "@/components/ui/button"
 import { Heart, Users, DollarSign } from "lucide-react"
 import { usePosts } from "@/api/hooks/usePosts"
+import { OngStory } from "@/components/ong-story"
+import { PatrocinadoresSection } from "@/components/patrocinadores"
+import { Footer } from "@/components/footer"
 
 export default function HomePage() {
   const { posts, loading, error } = usePosts()
@@ -14,8 +17,13 @@ export default function HomePage() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-accent to-background py-20">
+      <section className="relative bg-gradient-to-b from-accent to-background py-20 md:py-36 overflow-hidden">
         <div className="container mx-auto px-4">
+          <div className="absolute inset-0 bg-cover bg-center bg-no-repeat -z-10" style={{
+            backgroundImage: 'url("/placeholder.svg?height=600&width=1200")',
+          }}>
+            <div className="absolute inset-0 bg-black/40"></div>
+          </div>
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-5xl font-bold text-foreground mb-6 text-balance">Todo animal de estimação merece um lar amoroso</h1>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed text-pretty">
@@ -24,7 +32,7 @@ export default function HomePage() {
               muito carinho. Juntos, transformamos a vida deles e a nossa.
             </p>
             <div className="flex items-center justify-center gap-4">
-              <Button size="lg" className="gap-2">
+              <Button size="lg" className="gap-2 bg-teal-600">
                 <Heart className="w-5 h-5" />
                 Doe agora
               </Button>
@@ -33,34 +41,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-12 border-y border-border bg-card/30">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-3">
-                <Heart className="w-6 h-6" />
-              </div>
-              <div className="text-3xl font-bold text-foreground mb-1">500+</div>
-              <div className="text-sm text-muted-foreground">Pets Rescued</div>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-secondary/10 text-secondary mb-3">
-                <Users className="w-6 h-6" />
-              </div>
-              <div className="text-3xl font-bold text-foreground mb-1">150+</div>
-              <div className="text-sm text-muted-foreground">Active Volunteers</div>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-3">
-                <DollarSign className="w-6 h-6" />
-              </div>
-              <div className="text-3xl font-bold text-foreground mb-1">$50K+</div>
-              <div className="text-sm text-muted-foreground">Financial Support</div>
-            </div>
-          </div>
-        </div>
-      </section>
+    <OngStory/>
+    <PatrocinadoresSection/>/
 
       {/* Evntos e novidades */}
       <section className="py-16">
@@ -101,6 +83,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <Footer/>
     </div>
   )
 }

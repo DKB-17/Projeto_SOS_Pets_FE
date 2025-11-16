@@ -6,7 +6,7 @@ import { Suspense } from "react"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Paws & Hearts - Pet Adoption NGO",
+  title: "SOS PETS ASSIS/SP",
   description: "Helping rescue animals find their forever homes through community support and compassion",
   generator: "v0.app",
 }
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt-br">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
         <Suspense fallback={null}>{children}</Suspense>
       </body>

@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Heart } from "lucide-react"
@@ -8,18 +9,17 @@ import { useEffect, useState } from "react"
 import { getAuthToken } from "@/api/utils/auth"
 
 const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/success-stories", label: "Success Stories" },
-  { href: "/contact", label: "Contact & Donate" },
-  { href: "/login", label: "Login" },
+  { href: "/", label: "Inicio" },
+  { href: "/success-stories", label: "Historia de Sucesso" },
+  { href: "/contact", label: "Contato e Doação" },
 ]
 
 const authNavItems = [
-  { href: "/", label: "Home" },
-  { href: "/success-stories", label: "Success Stories" },
-  { href: "/contact", label: "Contact & Donate" },
-  { href: "/management", label: "Management" },
-  { href: "/login", label: "Logout" },
+  { href: "/", label: "Inicio" },
+  { href: "/success-stories", label: "Historia de Sucesso" },
+  { href: "/contact", label: "Contato e Doação" },
+  { href: "/management", label: "Gerenciar" },
+  { href: "/login", label: "Sair" },
 ]
 
 export function Navigation() {
@@ -42,8 +42,8 @@ export function Navigation() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2 font-semibold text-lg">
-            <Heart className="w-6 h-6 text-primary fill-primary" />
-            <span className="text-foreground">Paws & Hearts</span>
+            <Image src="/logo.png" alt="SOS PETS Assis/SP" width={40} height={40} />
+            <span className="text-foreground">SOS PETS Assis/SP</span>
           </Link>
 
           <div className="flex items-center gap-6">
