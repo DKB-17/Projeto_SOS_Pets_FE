@@ -8,6 +8,7 @@ import { usePosts } from "@/api/hooks/usePosts"
 import { OngStory } from "@/components/ong-story"
 import { PatrocinadoresSection } from "@/components/patrocinadores"
 import { Footer } from "@/components/footer"
+import Link from "next/link"
 
 export default function HomePage() {
   const { posts, loading, error } = usePosts()
@@ -18,12 +19,8 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-b from-accent to-background py-20 md:py-36 overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="absolute inset-0 bg-cover bg-center bg-no-repeat -z-10" style={{
-            backgroundImage: 'url("/placeholder.svg?height=600&width=1200")',
-          }}>
-            <div className="absolute inset-0 bg-black/40"></div>
-          </div>
+
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-5xl font-bold text-foreground mb-6 text-balance">Todo animal de estimação merece um lar amoroso</h1>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed text-pretty">
@@ -32,20 +29,21 @@ export default function HomePage() {
               muito carinho. Juntos, transformamos a vida deles e a nossa.
             </p>
             <div className="flex items-center justify-center gap-4">
+              <Link href="/contact">
               <Button size="lg" className="gap-2 bg-teal-600">
                 <Heart className="w-5 h-5" />
                 Doe agora
               </Button>
-            
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
     <OngStory/>
-    <PatrocinadoresSection/>
+    <PatrocinadoresSection/>/
 
-      {/* Eventos e novidades */}
+      {/* Evntos e novidades */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
