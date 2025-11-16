@@ -29,15 +29,15 @@ export function ContactForm() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Send Us a Message</CardTitle>
+        <CardTitle>Envie-nos uma mensagem</CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="name">Nome</Label>
             <Input
               id="name"
-              placeholder="Your name"
+              placeholder="Seu nome"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               required
@@ -48,27 +48,27 @@ export function ContactForm() {
             <Input
               id="email"
               type="email"
-              placeholder="your.email@example.com"
+              placeholder="voce.email@example.com"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               required
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="subject">Subject</Label>
+            <Label htmlFor="subject">Assunto</Label>
             <Input
               id="subject"
-              placeholder="What is this about?"
+              placeholder="Do que se trata?"
               value={formData.subject}
               onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
               required
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="message">Message</Label>
+            <Label htmlFor="message">Mensagem</Label>
             <Textarea
               id="message"
-              placeholder="Tell us more..."
+              placeholder="Conte-nos mais..."
               rows={5}
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -77,7 +77,7 @@ export function ContactForm() {
           </div>
           <Button type="submit" className="w-full gap-2" size="lg">
             <Send className="w-4 h-4" />
-            Send Message
+              Enviar mensagem
           </Button>
         </form>
       </CardContent>

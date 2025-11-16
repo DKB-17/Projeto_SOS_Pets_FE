@@ -36,15 +36,16 @@ export default function HomePage() {
                 <Heart className="w-5 h-5" />
                 Doe agora
               </Button>
+            
             </div>
           </div>
         </div>
       </section>
 
     <OngStory/>
-    <PatrocinadoresSection/>/
+    <PatrocinadoresSection/>
 
-      {/* Evntos e novidades */}
+      {/* Eventos e novidades */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">

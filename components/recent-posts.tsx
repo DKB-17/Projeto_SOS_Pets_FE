@@ -49,7 +49,7 @@ export function RecentPosts() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Recent Posts</CardTitle>
+        <CardTitle>Posts recentes</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">

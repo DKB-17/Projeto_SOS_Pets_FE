@@ -48,12 +48,12 @@ export function SocialPostComposer({ onPost }: SocialPostComposerProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Create New Post</CardTitle>
+        <CardTitle>Criar nova postagem</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         {/* Platform Selection */}
         <div className="space-y-2">
-          <Label>Select Platforms</Label>
+          <Label>Selecione a plataformas</Label>
           <div className="flex gap-2">
             <Button
               type="button"
@@ -80,7 +80,7 @@ export function SocialPostComposer({ onPost }: SocialPostComposerProps) {
 
         {/* Content Input */}
         <div className="space-y-2">
-          <Label htmlFor="post-content">Post Content</Label>
+          <Label htmlFor="post-content">Postar conteúdo</Label>
           <Textarea
             id="post-content"
             placeholder="Share your message with the community..."
@@ -90,7 +90,7 @@ export function SocialPostComposer({ onPost }: SocialPostComposerProps) {
             className="resize-none"
           />
           <div className="flex justify-between text-sm text-muted-foreground">
-            <span>Write an engaging post about adoptions, events, or success stories</span>
+            <span>Escreva uma postagem interessante sobre adoções, eventos ou histórias de sucesso.</span>
             <span className={cn(characterCount > maxCharacters && "text-destructive")}>
               {characterCount}/{maxCharacters}
             </span>
@@ -99,19 +99,19 @@ export function SocialPostComposer({ onPost }: SocialPostComposerProps) {
 
         {/* Image Upload */}
         <div className="space-y-2">
-          <Label htmlFor="post-image">Add Image (Optional)</Label>
+          <Label htmlFor="post-image">Adicionar imagem (opcional)</Label>
           <div className="flex gap-2">
             <Button type="button" variant="outline" size="sm" className="gap-2 bg-transparent" asChild>
               <label htmlFor="post-image" className="cursor-pointer">
                 <ImageIcon className="w-4 h-4" />
-                Upload Image
+                Carregar imagem
                 <input id="post-image" type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
               </label>
             </Button>
             {imagePreview && (
               <Button type="button" variant="ghost" size="sm" onClick={() => setImagePreview("")} className="gap-2">
                 <X className="w-4 h-4" />
-                Remove
+                Remover
               </Button>
             )}
           </div>
@@ -129,7 +129,7 @@ export function SocialPostComposer({ onPost }: SocialPostComposerProps) {
           className="w-full"
           size="lg"
         >
-          Post to {selectedPlatforms.length} Platform{selectedPlatforms.length !== 1 ? "s" : ""}
+          Postar em {selectedPlatforms.length} Plataforma{selectedPlatforms.length !== 1 ? "s" : ""}
         </Button>
       </CardContent>
     </Card>

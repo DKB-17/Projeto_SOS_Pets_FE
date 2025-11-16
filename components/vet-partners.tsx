@@ -4,47 +4,47 @@ import { MapPin, Phone, Globe } from "lucide-react"
 const vetPartners = [
   {
     id: 1,
-    name: "Caring Paws Veterinary Clinic",
-    address: "123 Main Street, Downtown",
-    phone: "(555) 123-4567",
-    website: "www.caringpaws.com",
-    specialties: "Emergency Care, Surgery",
+    name: "Hospital Veterinário Vet House",
+    address: "Av. Otto Ribeiro, 2318 - Jardim Canada",
+    phone: "(18) 3322-3776",
+    website: "www.vethouse.com",
+    specialties: "Clínica Geral, Cirurgia, Emergência",
   },
   {
-    id: 2,
-    name: "Happy Tails Animal Hospital",
-    address: "456 Oak Avenue, Westside",
-    phone: "(555) 234-5678",
-    website: "www.happytails.com",
-    specialties: "Dental, Wellness Exams",
+    "id": 2,
+    "name": "Agropecuária Tuiuiú (Casa de Ração)",
+    "address": "Av. Nove de Julho, 850 - Vila Xavier, Assis - SP",
+    "phone": "(18) 3323-2020",
+    "website": "www.tuiuiu.com",
+    "specialties": "Rações, Acessórios, Medicamentos"
   },
   {
-    id: 3,
-    name: "Pet Health Center",
-    address: "789 Elm Road, Eastside",
-    phone: "(555) 345-6789",
-    website: "www.pethealthcenter.com",
-    specialties: "Vaccinations, Spay/Neuter",
+    "id": 3,
+    "name": "Rei dos Animais Pet Shop (Casa de Ração)",
+    "address": "R. Floriano Peixoto, 400 - Centro, Assis - SP",
+    "phone": "(18) 3324-9090",
+    "website": "www.reidosanimias.com",
+    "specialties": "Rações, Banho e Tosa, Acessórios"
   },
   {
-    id: 4,
-    name: "Compassionate Care Vet",
-    address: "321 Pine Street, Northside",
-    phone: "(555) 456-7890",
-    website: "www.compassionatecarevet.com",
-    specialties: "Exotic Pets, Rehabilitation",
-  },
+    "id": 4,
+    "name": "Clínica Veterinária Animed",
+    "address": "Av. Rui Barbosa, 1500 - Centro, Assis - SP",
+    "phone": "(18) 3322-5678",
+    "website": "www.animed.com",
+    "specialties": "Clínica Geral, Dermatologia, Odontologia"
+  }
 ]
 
 export function VetPartners() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Our Veterinary Partners</CardTitle>
+        <CardTitle>Nossos Parceiros Veterinários</CardTitle>
       </CardHeader>
       <CardContent>
         <p className="text-sm text-muted-foreground mb-6">
-          We work with these trusted veterinary clinics to provide the best care for our rescued animals.
+          Trabalhamos com essas clínicas veterinárias de confiança para oferecer o melhor atendimento aos nossos animais resgatados.
         </p>
         <div className="space-y-4">
           {vetPartners.map((vet) => (
@@ -65,7 +65,7 @@ export function VetPartners() {
                 </div>
               </div>
               <p className="text-xs text-muted-foreground pt-2 border-t">
-                <span className="font-medium">Specialties:</span> {vet.specialties}
+                <span className="font-medium">Especialidades:</span> {vet.specialties}
               </p>
             </div>
           ))}

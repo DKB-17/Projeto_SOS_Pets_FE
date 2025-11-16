@@ -7,8 +7,7 @@ import "./globals.css"
 
 export const metadata: Metadata = {
   title: "SOS PETS ASSIS/SP",
-  description: "Helping rescue animals find their forever homes through community support and compassion",
-  generator: "v0.app",
+  description: "Ajudar animais resgatados a encontrarem seus lares eternos por meio do apoio e compaixão da comunidade"
 }
 
 export default function RootLayout({
