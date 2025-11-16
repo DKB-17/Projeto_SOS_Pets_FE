@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { Heart } from "lucide-react"
 import { useEffect, useState } from "react"
 import { getAuthToken } from "@/api/utils/auth"
 
@@ -41,9 +40,13 @@ export function Navigation() {
     <nav className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2 font-semibold text-lg">
-            <Heart className="w-6 h-6 text-primary fill-primary" />
-            <span className="text-foreground">SOS Pets</span>
+
+          <Link href="/" className="flex items-center">
+            <img 
+              src="/logo.jpg" 
+              alt="SOS Pets" 
+              className="h-16 w-auto object-contain"    
+            />
           </Link>
 
           <div className="flex items-center gap-6">

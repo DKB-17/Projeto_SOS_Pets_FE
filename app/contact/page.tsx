@@ -97,7 +97,7 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Card>
                 <CardContent className="pt-6">
-                  <h3 className="font-semibold text-lg mb-4">Follow Us</h3>
+                  <h3 className="font-semibold text-lg mb-4">Acompanhe nossa rees sociais</h3>
                   <p className="text-sm text-muted-foreground mb-4">
                     Fique por dentro dos nossos resgates mais recentes, eventos de adoção e histórias de sucesso nas redes sociais.
                   </p>

@@ -68,10 +68,12 @@ export default function SuccessStoriesPage() {
                 Se você adotou um animal de estimação por meio de nossa organização, gostaríamos 
                 muito de ouvir sobre sua jornada e compartilhá-la com nossa comunidade.
               </p>
-              <Button size="lg" className="gap-2">
-                <Heart className="w-5 h-5" />
-                Envie sua história
-              </Button>
+              <a href="/contact">
+                <Button size="lg" className="gap-2">
+                  <Heart className="w-5 h-5" />
+                  Envie sua história
+                </Button>
+              </a>
             </div>
           </div>
         </div>
