@@ -18,6 +18,8 @@ import { useCreatePartner, useDeletePartner, usePartners, useUpdatePartner } fro
 import { ImageUpload } from "@/components/image-upload"
 import { useCreateSpecialty, useDeleteSpecialty, useSpecialties, useUpdateSpecialty } from "@/api/hooks/useSpecialties"
 import { useCategories, useCreateCategory, useDeleteCategory, useUpdateCategory } from "@/api/hooks/useCategories"
+import specialtyService from "@/api/services/specialty.service"
+import { Specialty } from "@/api/types/specialty.type"
 
 export default function ManagementPage() {
   const router = useRouter()
@@ -842,11 +844,12 @@ function UsersManagement() {
 
 function PartnersManagement() {
   const { partners, loading, error } = usePartners()
+  const { specialties, loading: loadingSpecs } = useSpecialties()
   const { createPartner, loading: createLoading } = useCreatePartner()
   const { updatePartner, loading: updateLoading } = useUpdatePartner()
   const { deletePartner, loading: deleteLoading } = useDeletePartner()
   const [editingId, setEditingId] = useState<number | null>(null)
-  const [formData, setFormData] = useState({ name: "", address: "", phone: "", email: "", siteUrl: "" })
+  const [formData, setFormData] = useState({ name: "", address: "", phone: "", email: "", siteUrl: "", specialties: [] as Specialty[] })
   const [message, setMessage] = useState("")
 
   const handleCreate = async () => {
@@ -875,7 +878,7 @@ function PartnersManagement() {
       })
         setMessage("Partner created successfully")
       }
-      setFormData({ name: "", address: "", phone: "", email: "", siteUrl: "" })
+      setFormData({ name: "", address: "", phone: "", email: "", siteUrl: "", specialties: [] })
       setMessage("Partner created successfully")
       setTimeout(() => setMessage(""), 3000)
     } catch (err) {
@@ -897,7 +900,7 @@ function PartnersManagement() {
 
   const handleEdit = (partner: any) => {
     setEditingId(partner.id)
-    setFormData({ name: partner.name, address: partner.address, phone: partner.phone, email: partner.email || "", siteUrl: partner.siteUrl || "" })
+    setFormData({ name: partner.name, address: partner.address, phone: partner.phone, email: partner.email || "", siteUrl: partner.siteUrl || "", specialties: partner.specialties || [] })
   }
 
   return (
@@ -964,6 +967,30 @@ function PartnersManagement() {
               placeholder="Website URL"
             />
           </div>
+          <div className="space-y-2">
+            <Label>Specialties</Label>
+
+            {loadingSpecs ? (
+              <p>Loading specialties...</p>
+            ) : (
+              <select
+                multiple
+                className="border rounded p-2 w-full"
+                value={formData.specialties.map((s) => s.id.toString())}
+                onChange={(e) => {
+                  const selectedIds = Array.from(e.target.selectedOptions).map((opt) => Number(opt.value))
+                  const selectedSpecs = specialties.filter((s) => selectedIds.includes(s.id))
+                  setFormData({ ...formData, specialties: selectedSpecs })
+                }}
+              >
+                {specialties.map((spec) => (
+                  <option key={spec.id} value={spec.id}>
+                    {spec.name}
+                  </option>
+                ))}
+              </select>
+            )}
+          </div>
           <div className="flex gap-2">
           <Button onClick={handleCreate} disabled={createLoading}>
             {createLoading ? "Saving..." : editingId ? "Update Partner" : "Create Partner"}
@@ -971,7 +998,7 @@ function PartnersManagement() {
             {editingId && (
               <Button variant="outline" onClick={() => {
                 setEditingId(null)
-                setFormData({ name: "", address: "", phone: "", email: "", siteUrl: "" })
+                setFormData({ name: "", address: "", phone: "", email: "", siteUrl: "", specialties: [] })
               }}>
                 Cancel
           </Button>

@@ -2,16 +2,16 @@
 
 import { useEffect, useState } from 'react'
 import specialtyService from '../services/specialty.service'
-import type { SpecialtyRequestDto } from '../types/specialty.type'
+import type { Specialty } from '../types/specialty.type'
 
 interface UseSpecialtiesReturn {
-  specialties: SpecialtyRequestDto[]
+  specialties: Specialty[]
   loading: boolean
   error: Error | null
 }
 
 export function useSpecialties(): UseSpecialtiesReturn {
-  const [specialties, setSpecialties] = useState<SpecialtyRequestDto[]>([])
+  const [specialties, setSpecialties] = useState<Specialty[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
 
@@ -38,7 +38,7 @@ export function useCreateSpecialty() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<Error | null>(null)
 
-  const createSpecialty = async (data: SpecialtyRequestDto) => {
+  const createSpecialty = async (data: Specialty) => {
     try {
       setLoading(true)
       setError(null)
@@ -60,7 +60,7 @@ export function useUpdateSpecialty() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<Error | null>(null)
 
-  const updateSpecialty = async (id: number, data: SpecialtyRequestDto) => {
+  const updateSpecialty = async (id: number, data: Specialty) => {
     try {
       setLoading(true)
       setError(null)
