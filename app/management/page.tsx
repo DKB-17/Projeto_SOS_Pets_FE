@@ -865,6 +865,7 @@ function PartnersManagement() {
           phone: formData.phone,
           email: formData.email,
           siteUrl: formData.siteUrl,
+          
         })
         setMessage("Partner updated successfully")
         setEditingId(null)
@@ -971,24 +972,36 @@ function PartnersManagement() {
             <Label>Specialties</Label>
 
             {loadingSpecs ? (
-              <p>Loading specialties...</p>
+              <p className="text-muted-foreground">Loading specialties...</p>
             ) : (
-              <select
-                multiple
-                className="border rounded p-2 w-full"
-                value={formData.specialties.map((s) => s.id.toString())}
-                onChange={(e) => {
-                  const selectedIds = Array.from(e.target.selectedOptions).map((opt) => Number(opt.value))
-                  const selectedSpecs = specialties.filter((s) => selectedIds.includes(s.id))
-                  setFormData({ ...formData, specialties: selectedSpecs })
-                }}
-              >
-                {specialties.map((spec) => (
-                  <option key={spec.id} value={spec.id}>
-                    {spec.name}
-                  </option>
-                ))}
-              </select>
+              <div className="space-y-1 border rounded-md p-3">
+                {specialties.map((spec) => {
+                  const isChecked = formData.specialties.some((s) => s.id === spec.id)
+
+                  return (
+                    <label key={spec.id} className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={isChecked}
+                        onChange={() => {
+                          let updated
+
+                          if (isChecked) {
+                            // remove
+                            updated = formData.specialties.filter((s) => s.id !== spec.id)
+                          } else {
+                            // add
+                            updated = [...formData.specialties, spec]
+                          }
+
+                          setFormData({ ...formData, specialties: updated })
+                        }}
+                      />
+                      {spec.name}
+                    </label>
+                  )
+                })}
+              </div>
             )}
           </div>
           <div className="flex gap-2">
