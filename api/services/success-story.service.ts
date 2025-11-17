@@ -28,20 +28,14 @@ class SuccessStoryService {
 
     if (images && images.length > 0) {
       const formData = new FormData()
-      formData.append("text", data.text)
-      formData.append("petName", data.petName)
-      formData.append("ownerName", data.ownerName)
-      formData.append("petBreed", data.petBreed)
-      if (data.date) formData.append("date", data.date)
+      formData.append("story", new Blob([JSON.stringify(data)], { type: "application/json" }))
       
       images.forEach((image) => {
         formData.append("files", image)
       })
 
       const response = await this.api.post<SuccessStoryRequestDto>("/successStories", formData, {
-        headers: { "Content-Type": "multipart/form-data",
-                    ...this.getHeaders()
-        },
+        headers: this.getHeaders(),
       })
       return response.data
     }
@@ -56,18 +50,14 @@ class SuccessStoryService {
 
     if (images && images.length > 0) {
       const formData = new FormData()
-      formData.append("text", data.text)
-      formData.append("petName", data.petName)
-      formData.append("ownerName", data.ownerName)
-      formData.append("petBreed", data.petBreed)
-      if (data.date) formData.append("date", data.date)
+      formData.append("story", new Blob([JSON.stringify(data)], { type: "application/json" }))
       
       images.forEach((image) => {
         formData.append("files", image)
       })
 
       const response = await this.api.put<SuccessStoryRequestDto>(`/successStories/${id}`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: this.getHeaders(),
       })
       return response.data
     }

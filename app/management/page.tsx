@@ -13,9 +13,11 @@ import { getAuthToken } from "@/api/utils/auth"
 import { usePosts, useCreatePost, useUpdatePost, useDeletePost } from "@/api/hooks/usePosts"
 import { useSuccessStories, useCreateSuccessStory, useDeleteSuccessStory, useUpdateSuccessStory } from "@/api/hooks/useSuccessStories"
 import { Trash2, Plus, Edit2 } from "lucide-react"
-import { useCreateUser, useDeleteUser, useUpdateUser, useUsers } from "@/api/hooks/useUsers"
+import { useCreateUser, useDeleteUser, useUsers } from "@/api/hooks/useUsers"
 import { useCreatePartner, useDeletePartner, usePartners, useUpdatePartner } from "@/api/hooks/usePartners"
 import { ImageUpload } from "@/components/image-upload"
+import { useCreateSpecialty, useDeleteSpecialty, useSpecialties, useUpdateSpecialty } from "@/api/hooks/useSpecialties"
+import { useCategories, useCreateCategory, useDeleteCategory, useUpdateCategory } from "@/api/hooks/useCategories"
 
 export default function ManagementPage() {
   const router = useRouter()
@@ -46,9 +48,11 @@ export default function ManagementPage() {
             <h1 className="text-4xl font-bold text-foreground mb-8">Painel de gerenciamento</h1>
 
             <Tabs defaultValue="posts" className="w-full">
-              <TabsList className="grid w-full grid-cols-5">
+              <TabsList className="grid w-full grid-cols-6">
                 <TabsTrigger value="posts">Posts</TabsTrigger>
                 <TabsTrigger value="stories">Histórias de sucesso</TabsTrigger>
+                <TabsTrigger value="categories">Categoria</TabsTrigger>
+                <TabsTrigger value="specialties">Especialidades</TabsTrigger>
                 <TabsTrigger value="users">Usuarios</TabsTrigger>
                 <TabsTrigger value="partners">Parceiros</TabsTrigger>
               </TabsList>
@@ -61,6 +65,13 @@ export default function ManagementPage() {
                 <StoriesManagement />
               </TabsContent>
 
+              <TabsContent value="categories">
+                <CategoriesManagement />
+              </TabsContent>
+
+              <TabsContent value="specialties">
+                <SpecialtiesManagement />
+              </TabsContent>
               
               <TabsContent value="users">
                 <UsersManagement />
@@ -74,6 +85,266 @@ export default function ManagementPage() {
           </div>
         </div>
       </section>
+    </div>
+  )
+}
+
+function CategoriesManagement() {
+  const { categories, loading, error } = useCategories()
+  const { createCategory, loading: createLoading } = useCreateCategory()
+  const { updateCategory, loading: updateLoading } = useUpdateCategory()
+  const { deleteCategory, loading: deleteLoading } = useDeleteCategory()
+  const [editingId, setEditingId] = useState<number | null>(null)
+  const [formData, setFormData] = useState({ name: '' })
+  const [message, setMessage] = useState('')
+
+  const handleCreate = async () => {
+    if (!formData.name) {
+      setMessage('Please fill in the category name')
+      return
+    }
+    try {
+      if (editingId) {
+        await updateCategory(editingId, { name: formData.name })
+        setMessage('Category updated successfully')
+        setEditingId(null)
+      } else {
+        await createCategory({ name: formData.name })
+        setMessage('Category created successfully')
+      }
+      setFormData({ name: '' })
+      setTimeout(() => setMessage(''), 3000)
+    } catch (err) {
+      setMessage('Failed to save category')
+    }
+  }
+
+  const handleDelete = async (id: number) => {
+    if (confirm('Are you sure you want to delete this category?')) {
+      try {
+        await deleteCategory(id)
+        setMessage('Category deleted successfully')
+        setTimeout(() => setMessage(''), 3000)
+      } catch (err) {
+        setMessage('Failed to delete category')
+      }
+    }
+  }
+
+  const handleEdit = (category: any) => {
+    setEditingId(category.id)
+    setFormData({ name: category.name })
+  }
+
+  return (
+    <div className="space-y-6 mt-6">
+      {message && (
+        <Alert>
+          <AlertDescription>{message}</AlertDescription>
+        </Alert>
+      )}
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Plus className="w-5 h-5" />
+            {editingId ? 'Edit Category' : 'Create New Category'}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="name">Category Name</Label>
+            <Input
+              id="name"
+              value={formData.name}
+              onChange={(e) => setFormData({ name: e.target.value })}
+              placeholder="Category name"
+            />
+          </div>
+          <div className="flex gap-2">
+            <Button onClick={handleCreate} disabled={createLoading}>
+              {createLoading ? 'Saving...' : editingId ? 'Update Category' : 'Create Category'}
+            </Button>
+            {editingId && (
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setEditingId(null)
+                  setFormData({ name: '' })
+                }}
+              >
+                Cancel
+              </Button>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Categories List</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {loading ? (
+            <p className="text-muted-foreground">Loading...</p>
+          ) : error ? (
+            <p className="text-red-500">Error loading categories</p>
+          ) : (
+            <div className="space-y-3">
+              {categories.map((category) => (
+                <div key={category.id} className="flex items-center justify-between p-3 border rounded">
+                  <div>
+                    <h3 className="font-semibold">{category.name}</h3>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm" onClick={() => handleEdit(category)}>
+                      <Edit2 className="w-4 h-4" />
+                    </Button>
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => handleDelete(category.id || 0)}
+                      disabled={deleteLoading}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
+
+function SpecialtiesManagement() {
+  const { specialties, loading, error } = useSpecialties()
+  const { createSpecialty, loading: createLoading } = useCreateSpecialty()
+  const { updateSpecialty, loading: updateLoading } = useUpdateSpecialty()
+  const { deleteSpecialty, loading: deleteLoading } = useDeleteSpecialty()
+  const [editingId, setEditingId] = useState<number | null>(null)
+  const [formData, setFormData] = useState({ name: '' })
+  const [message, setMessage] = useState('')
+
+  const handleCreate = async () => {
+    if (!formData.name) {
+      setMessage('Please fill in the specialty name')
+      return
+    }
+    try {
+      if (editingId) {
+        await updateSpecialty(editingId, { name: formData.name })
+        setMessage('Specialty updated successfully')
+        setEditingId(null)
+      } else {
+        await createSpecialty({ name: formData.name })
+        setMessage('Specialty created successfully')
+      }
+      setFormData({ name: '' })
+      setTimeout(() => setMessage(''), 3000)
+    } catch (err) {
+      setMessage('Failed to save specialty')
+    }
+  }
+
+  const handleDelete = async (id: number) => {
+    if (confirm('Are you sure you want to delete this specialty?')) {
+      try {
+        await deleteSpecialty(id)
+        setMessage('Specialty deleted successfully')
+        setTimeout(() => setMessage(''), 3000)
+      } catch (err) {
+        setMessage('Failed to delete specialty')
+      }
+    }
+  }
+
+  const handleEdit = (specialty: any) => {
+    setEditingId(specialty.id)
+    setFormData({ name: specialty.name })
+  }
+
+  return (
+    <div className="space-y-6 mt-6">
+      {message && (
+        <Alert>
+          <AlertDescription>{message}</AlertDescription>
+        </Alert>
+      )}
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Plus className="w-5 h-5" />
+            {editingId ? 'Edit Specialty' : 'Create New Specialty'}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="name">Specialty Name</Label>
+            <Input
+              id="name"
+              value={formData.name}
+              onChange={(e) => setFormData({ name: e.target.value })}
+              placeholder="Specialty name"
+            />
+          </div>
+          <div className="flex gap-2">
+            <Button onClick={handleCreate} disabled={createLoading}>
+              {createLoading ? 'Saving...' : editingId ? 'Update Specialty' : 'Create Specialty'}
+            </Button>
+            {editingId && (
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setEditingId(null)
+                  setFormData({ name: '' })
+                }}
+              >
+                Cancel
+              </Button>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Specialties List</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {loading ? (
+            <p className="text-muted-foreground">Loading...</p>
+          ) : error ? (
+            <p className="text-red-500">Error loading specialties</p>
+          ) : (
+            <div className="space-y-3">
+              {specialties.map((specialty) => (
+                <div key={specialty.id} className="flex items-center justify-between p-3 border rounded">
+                  <div>
+                    <h3 className="font-semibold">{specialty.name}</h3>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm" onClick={() => handleEdit(specialty)}>
+                      <Edit2 className="w-4 h-4" />
+                    </Button>
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => handleDelete(specialty.id || 0)}
+                      disabled={deleteLoading}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </CardContent>
+      </Card>
     </div>
   )
 }

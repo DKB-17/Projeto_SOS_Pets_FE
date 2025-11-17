@@ -1,6 +1,7 @@
 import axios, { type AxiosInstance } from "axios"
 import { getAuthToken } from "../utils/auth"
 import type { UserRequestDto, UserResponseDto } from "../types/user.type"
+import { headers } from "next/headers"
 
 class UserService {
   private api: AxiosInstance
@@ -29,7 +30,10 @@ class UserService {
   }
 
   async createUser(data: UserRequestDto): Promise<UserResponseDto> {
-    const response = await this.api.post<UserResponseDto>("/users", data)
+    const response = await this.api.post<UserResponseDto>("/users", data, {
+        headers: this.getHeaders()
+      }
+    )
     return response.data
   }
 

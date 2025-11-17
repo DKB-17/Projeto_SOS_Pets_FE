@@ -80,28 +80,6 @@ export function useCreateUser() {
   return { createUser, loading, error }
 }
 
-export function useUpdateUser() {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<Error | null>(null)
-
-  const updateUser = async (id: number, data: UserRequestDto) => {
-    try {
-      setLoading(true)
-      setError(null)
-      const updatedUser = await userService.updateUser(id, data)
-      return updatedUser
-    } catch (err) {
-      const error = err instanceof Error ? err : new Error("Failed to update user")
-      setError(error)
-      throw error
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  return { updateUser, loading, error }
-}
-
 export function useDeleteUser() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<Error | null>(null)

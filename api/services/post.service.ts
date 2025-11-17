@@ -29,7 +29,7 @@ class PostService {
 
     if (images && images.length > 0) {
       const formData = new FormData()
-      formData.append("post", JSON.stringify(data))
+      formData.append("post", new Blob([JSON.stringify(data)], { type: "application/json" }))
   
       images.forEach((image) => {
         formData.append("files", image)
@@ -53,16 +53,14 @@ class PostService {
 
     if (images && images.length > 0) {
       const formData = new FormData()
-      formData.append("post", JSON.stringify(data))
+      formData.append("post", new Blob([JSON.stringify(data)], { type: "application/json" }))
       
       images.forEach((image) => {
         formData.append("files", image)
       })
 
       const response = await this.api.put<PostRequestDto>(`/posts/${id}`, formData, {
-        headers: { "Content-Type": "multipart/form-data",
-          ...this.getHeaders()
-         },
+        headers: this.getHeaders(),
       })
       return response.data
     }

@@ -1,8 +1,7 @@
 "use client"
 
 import type React from "react"
-
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Navigation } from "@/components/navigation"
 import { Button } from "@/components/ui/button"
@@ -12,6 +11,7 @@ import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import authService from "@/api/services/auth.service"
 import { Heart } from "lucide-react"
+import { getAuthToken } from "@/api/utils/auth"
 
 export default function LoginPage() {
   const router = useRouter()
@@ -19,14 +19,32 @@ export default function LoginPage() {
   const [password, setPassword] = useState("string")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+  const [isLogged, setIsLogged] = useState(false)
+
+  // Detecta login ao carregar a página
+  useEffect(() => {
+    setIsLogged(!!getAuthToken())
+  }, [])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setError("")
 
+    // 👉 Se já estiver logado → Fazer logout
+    if (isLogged) {
+      authService.logout()
+      setIsLogged(false)
+      router.push("/")
+      router.refresh()
+      setLoading(false)
+      return
+    }
+
+    // 👉 Senão, tentar login normalmente
     try {
       await authService.login({ email, password })
+      setIsLogged(true)
       router.push("/management")
       router.refresh()
     } catch (err) {
@@ -53,8 +71,9 @@ export default function LoginPage() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Sign In</CardTitle>
+                <CardTitle>{isLogged ? "Logout" : "Sign In"}</CardTitle>
               </CardHeader>
+
               <CardContent>
                 <form onSubmit={handleLogin} className="space-y-4">
                   {error && (
@@ -63,40 +82,46 @@ export default function LoginPage() {
                     </Alert>
                   )}
 
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      placeholder="user@example.com"
-                    />
-                  </div>
+                  {!isLogged && (
+                    <>
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          required
+                          placeholder="user@example.com"
+                        />
+                      </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="password">Password</Label>
-                    <Input
-                      id="password"
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      placeholder="string"
-                    />
-                  </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="password">Password</Label>
+                        <Input
+                          id="password"
+                          type="password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          required
+                          placeholder="string"
+                        />
+                      </div>
+                    </>
+                  )}
 
                   <Button type="submit" className="w-full" disabled={loading}>
-                    {loading ? "Signing in..." : "Sign In"}
+                    {loading ? "Processing..." : isLogged ? "Logout" : "Login"}
                   </Button>
                 </form>
               </CardContent>
             </Card>
 
-            <p className="text-xs text-muted-foreground text-center mt-4">
-              Demo credentials: Teste@teste.com / 123456
-            </p>
+            {!isLogged && (
+              <p className="text-xs text-muted-foreground text-center mt-4">
+                Demo credentials: Teste@teste.com / 123456
+              </p>
+            )}
           </div>
         </div>
       </section>
