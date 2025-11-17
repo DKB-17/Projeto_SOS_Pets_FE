@@ -23,7 +23,7 @@
   --accent-foreground: oklch(0.25 0.02 30);
 
   --destructive: #E21D26;
-  --destructive-foreground: oklch(0.985 0 0);
+  --destructive-foreground: oklch(58.305% 0.23863 28.392 / 0.5);
 
   --border: hsl(214.3 31.8% 91.4%);
   --input: hsl(214.3 31.8% 91.4%);

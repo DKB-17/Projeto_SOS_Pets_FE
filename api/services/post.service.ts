@@ -19,12 +19,48 @@ class PostService {
     return response.data
   }
 
-  async createPost(data: PostRequestDto): Promise<PostRequestDto> {
+  async createPost(data: PostRequestDto, images?: File[]): Promise<PostRequestDto> {
+
+    if (images && images.length > 0) {
+      const formData = new FormData()
+      formData.append("title", data.title)
+      formData.append("text", data.text)
+      formData.append("category", JSON.stringify(data.category))
+      if (data.date) formData.append("date", data.date)
+      
+      images.forEach((image) => {
+        formData.append("images", image)
+      })
+
+      const response = await this.api.post<PostRequestDto>("/posts", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      return response.data
+    }
+
     const response = await this.api.post<PostRequestDto>("/posts", data)
     return response.data
   }
 
-  async updatePost(id: number, data: PostRequestDto): Promise<PostRequestDto> {
+  async updatePost(id: number, data: PostRequestDto, images?: File[]): Promise<PostRequestDto> {
+
+    if (images && images.length > 0) {
+      const formData = new FormData()
+      formData.append("title", data.title)
+      formData.append("text", data.text)
+      formData.append("category", JSON.stringify(data.category))
+      if (data.date) formData.append("date", data.date)
+      
+      images.forEach((image) => {
+        formData.append("images", image)
+      })
+
+      const response = await this.api.put<PostRequestDto>(`/posts/${id}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      return response.data
+    }
+
     const response = await this.api.put<PostRequestDto>(`/posts/${id}`, data)
     return response.data
   }

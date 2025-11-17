@@ -1,7 +1,4 @@
-export interface Specialty {
-  id: number
-  name: string
-}
+import { Specialty } from "./specialty.type"
 
 export interface PartnerRequestDto {
   id?: number

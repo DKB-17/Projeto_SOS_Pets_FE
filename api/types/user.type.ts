@@ -1,7 +1,4 @@
-export interface Role {
-  id: number
-  name: string
-}
+
 
 export interface UserRequestDto {
   id?: number
@@ -10,18 +7,16 @@ export interface UserRequestDto {
   gender?: string
   cpf: string
   email?: string
-  password?: string
   phone?: string
-  role?: Role
+  password?: string
 }
 
 export interface UserResponseDto {
-  id: number
+  id?: number
   name: string
-  email?: string
   age?: string
   gender?: string
-  phone?: string
   cpf: string
-  role?: Role
+  email?: string
+  phone?: string
 }

@@ -6,9 +6,20 @@ import { Button } from "@/components/ui/button"
 import { Heart } from "lucide-react"
 import { useSuccessStories } from "@/api/hooks/useSuccessStories"
 import Link from "next/link"
+import { SuccessStoryRequestDto, SuccessStoryResponseDto } from "@/api/types/success-story.type"
+import { useState } from "react"
+import { StoryModal } from "@/components/story-modal"
 
 export default function SuccessStoriesPage() {
   const { stories, loading, error } = useSuccessStories()
+
+  const [selectedStory, setSelectedStory] = useState<SuccessStoryResponseDto | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleStoryClick = (story: SuccessStoryResponseDto) => {
+    setSelectedStory(story)
+    setIsModalOpen(true)
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -51,12 +62,14 @@ export default function SuccessStoriesPage() {
                 stories.map((story) => (
                   <StoryCard
                     key={story.id}
+                    id={story.id}
                     petName={story.petName}
                     ownerName={story.ownerName}
                     story={story.text}
                     adoptionDate={story.date ? story.date : "" }
                     petType={story.petBreed}
-                    image={story.images ? story.images[0].path : undefined}
+                    image={story?.images?.[0]?.path}
+                    onClick={() => handleStoryClick(story)}
                   />
                 ))
               )}
@@ -79,6 +92,19 @@ export default function SuccessStoriesPage() {
           </div>
         </div>
       </section>
+
+      {/* Story Modal */}
+      {selectedStory && (
+        <StoryModal
+          story={selectedStory}
+          isOpen={isModalOpen}
+          onClose={() => {
+            setIsModalOpen(false)
+            setSelectedStory(null)
+          }}
+        />
+      )}
+
     </div>
   )
 }

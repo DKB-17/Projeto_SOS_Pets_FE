@@ -34,7 +34,7 @@ export function useUsers(): UseUsersReturn {
   return { users, loading, error }
 }
 
-export async function useUserById(id: number) {
+export function useUserById(id: number) {
   const [user, setUser] = useState<UserResponseDto | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
@@ -58,7 +58,7 @@ export async function useUserById(id: number) {
   return { user, loading, error }
 }
 
-export async function useCreateUser() {
+export function useCreateUser() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<Error | null>(null)
 
@@ -80,7 +80,7 @@ export async function useCreateUser() {
   return { createUser, loading, error }
 }
 
-export async function useUpdateUser() {
+export function useUpdateUser() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<Error | null>(null)
 
@@ -102,7 +102,7 @@ export async function useUpdateUser() {
   return { updateUser, loading, error }
 }
 
-export async function useDeleteUser() {
+export function useDeleteUser() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<Error | null>(null)
 

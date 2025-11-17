@@ -1,5 +1,5 @@
 import axios, { type AxiosInstance } from "axios"
-import type { SuccessStoryRequestDto } from "../types/success-story.type"
+import type { SuccessStoryRequestDto, SuccessStoryResponseDto } from "../types/success-story.type"
 
 class SuccessStoryService {
   private api: AxiosInstance
@@ -8,22 +8,60 @@ class SuccessStoryService {
     this.api = axios.create({ baseURL })
   }
 
-  async getSuccessStories(): Promise<SuccessStoryRequestDto[]> {
-    const response = await this.api.get<SuccessStoryRequestDto[]>("/successStories")
+  async getSuccessStories(): Promise<SuccessStoryResponseDto[]> {
+    const response = await this.api.get<SuccessStoryResponseDto[]>("/successStories")
     return response.data
   }
 
-  async getSuccessStoryById(id: number): Promise<SuccessStoryRequestDto> {
-    const response = await this.api.get<SuccessStoryRequestDto>(`/successStories/${id}`)
+  async getSuccessStoryById(id: number): Promise<SuccessStoryResponseDto> {
+    const response = await this.api.get<SuccessStoryResponseDto>(`/successStories/${id}`)
     return response.data
   }
 
-  async createSuccessStory(data: SuccessStoryRequestDto): Promise<SuccessStoryRequestDto> {
+  async createSuccessStory(data: SuccessStoryRequestDto, images?:File[]): Promise<SuccessStoryRequestDto> {
+
+    if (images && images.length > 0) {
+      const formData = new FormData()
+      formData.append("text", data.text)
+      formData.append("petName", data.petName)
+      formData.append("ownerName", data.ownerName)
+      formData.append("petBreed", data.petBreed)
+      if (data.date) formData.append("date", data.date)
+      
+      images.forEach((image) => {
+        formData.append("images", image)
+      })
+
+      const response = await this.api.post<SuccessStoryRequestDto>("/successStories", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      return response.data
+    }
+
     const response = await this.api.post<SuccessStoryRequestDto>("/successStories", data)
     return response.data
   }
 
-  async updateSuccessStory(id: number, data: SuccessStoryRequestDto): Promise<SuccessStoryRequestDto> {
+  async updateSuccessStory(id: number, data: SuccessStoryRequestDto, images?: File[]): Promise<SuccessStoryRequestDto> {
+
+    if (images && images.length > 0) {
+      const formData = new FormData()
+      formData.append("text", data.text)
+      formData.append("petName", data.petName)
+      formData.append("ownerName", data.ownerName)
+      formData.append("petBreed", data.petBreed)
+      if (data.date) formData.append("date", data.date)
+      
+      images.forEach((image) => {
+        formData.append("images", image)
+      })
+
+      const response = await this.api.put<SuccessStoryRequestDto>(`/successStories/${id}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      return response.data
+    }
+
     const response = await this.api.put<SuccessStoryRequestDto>(`/successStories/${id}`, data)
     return response.data
   }

@@ -4,6 +4,7 @@ import { Heart, Calendar } from "lucide-react"
 import { formatDate } from "@/api/utils/format-date"
 
 interface StoryCardProps {
+  id: number
   petName: string
   ownerName: string
   story: string
@@ -11,11 +12,12 @@ interface StoryCardProps {
   image?: string
   videoUrl?: string
   petType: string
+  onClick?: () => void
 }
 
-export function StoryCard({ petName, ownerName, story, adoptionDate, image, videoUrl, petType }: StoryCardProps) {
+export function StoryCard({ id, petName, ownerName, story, adoptionDate, image, videoUrl, petType, onClick }: StoryCardProps) {
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+    <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer" onClick={onClick}>
       <div className="aspect-video w-full overflow-hidden bg-muted relative">
         {videoUrl ? (
           <video src={videoUrl} controls className="w-full h-full object-cover">

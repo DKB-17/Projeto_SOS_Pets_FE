@@ -75,7 +75,7 @@ export function ContactForm() {
               required
             />
           </div>
-          <Button type="submit" className="w-full gap-2 bg-destructive" size="lg">
+          <Button type="submit" className="w-full gap-2 bg-destructive hover:bg-destructive-foreground" size="lg">
             <Send className="w-4 h-4" />
               Enviar mensagem
           </Button>

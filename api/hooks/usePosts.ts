@@ -62,11 +62,11 @@ export function useCreatePost() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<Error | null>(null)
 
-  const createPost = async (data: PostRequestDto) => {
+  const createPost = async (data: PostRequestDto, images?: File[]) => {
     try {
       setLoading(true)
       setError(null)
-      const newPost = await postService.createPost(data)
+      const newPost = await postService.createPost(data, images)
       return newPost
     } catch (err) {
       const error = err instanceof Error ? err : new Error("Failed to create post")

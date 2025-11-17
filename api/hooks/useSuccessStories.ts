@@ -2,16 +2,16 @@
 
 import { useEffect, useState } from "react"
 import successStoryService from "../services/success-story.service"
-import type { SuccessStoryRequestDto } from "../types/success-story.type"
+import type { SuccessStoryRequestDto, SuccessStoryResponseDto } from "../types/success-story.type"
 
 interface UseSuccessStoriesReturn {
-  stories: SuccessStoryRequestDto[]
+  stories: SuccessStoryResponseDto[]
   loading: boolean
   error: Error | null
 }
 
 export function useSuccessStories(): UseSuccessStoriesReturn {
-  const [stories, setStories] = useState<SuccessStoryRequestDto[]>([])
+  const [stories, setStories] = useState<SuccessStoryResponseDto[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
 
@@ -35,7 +35,7 @@ export function useSuccessStories(): UseSuccessStoriesReturn {
 }
 
 export function useSuccessStoryById(id: number) {
-  const [story, setStory] = useState<SuccessStoryRequestDto | null>(null)
+  const [story, setStory] = useState<SuccessStoryResponseDto | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
 
@@ -62,11 +62,11 @@ export function useCreateSuccessStory() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<Error | null>(null)
 
-  const createStory = async (data: SuccessStoryRequestDto) => {
+  const createStory = async (data: SuccessStoryRequestDto, images?: File[]) => {
     try {
       setLoading(true)
       setError(null)
-      const newStory = await successStoryService.createSuccessStory(data)
+      const newStory = await successStoryService.createSuccessStory(data, images)
       return newStory
     } catch (err) {
       const error = err instanceof Error ? err : new Error("Failed to create story")
