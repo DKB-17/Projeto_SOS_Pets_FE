@@ -12,7 +12,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { getAuthToken } from "@/api/utils/auth"
 import { usePosts, useCreatePost, useUpdatePost, useDeletePost } from "@/api/hooks/usePosts"
 import { useSuccessStories, useCreateSuccessStory, useDeleteSuccessStory, useUpdateSuccessStory } from "@/api/hooks/useSuccessStories"
-import { Trash2, Plus } from "lucide-react"
+import { Trash2, Plus, Edit2 } from "lucide-react"
 import { useCreateUser, useDeleteUser, useUpdateUser, useUsers } from "@/api/hooks/useUsers"
 import { useCreatePartner, useDeletePartner, usePartners, useUpdatePartner } from "@/api/hooks/usePartners"
 import { ImageUpload } from "@/components/image-upload"
@@ -94,17 +94,27 @@ function PostsManagement() {
       return
     }
     try {
+      if (editingId) {
+        await updatePost(editingId, {
+          title: formData.title,
+          text: formData.text,
+          category: { id: 1, name: "General" },
+        }, uploadedImages)
+        setMessage("Post updated successfully")
+        setEditingId(null)
+      } else {
       await createPost({
         title: formData.title,
         text: formData.text,
         category: { id: 1, name: "General" },
       }, uploadedImages)
+      setMessage("Post created successfully")
+      }
       setFormData({ title: "", text: "" })
       setUploadedImages([])
-      setMessage("Post created successfully")
       setTimeout(() => setMessage(""), 3000)
     } catch (err) {
-      setMessage("Failed to create post")
+      setMessage("Failed to save post")
     }
   }
 
@@ -120,6 +130,11 @@ function PostsManagement() {
     }
   }
 
+  const handleEdit = (post: any) => {
+    setEditingId(post.id)
+    setFormData({ title: post.title, text: post.text })
+  }
+
   return (
     <div className="space-y-6 mt-6">
       {message && (
@@ -132,7 +147,7 @@ function PostsManagement() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Plus className="w-5 h-5" />
-            Criar novo post
+            {editingId ? "Editar Post" : "Criar novo post"}
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -156,9 +171,20 @@ function PostsManagement() {
             />
           </div>
           <ImageUpload onImagesChange={setUploadedImages} maxImages={5} />
+        <div className="flex gap-2">
           <Button onClick={handleCreate} disabled={createLoading}>
-            {createLoading ? "Creating..." : "Create Post"}
+            {createLoading ? "Saving..." : editingId ? "Update Post" : "Create Post"}
+            </Button>
+            {editingId && (
+              <Button variant="outline" onClick={() => {
+                setEditingId(null)
+                setFormData({ title: "", text: "" })
+                setUploadedImages([])
+              }}>
+                Cancel
           </Button>
+          )}
+        </div>
         </CardContent>
       </Card>
 
@@ -179,14 +205,23 @@ function PostsManagement() {
                     <h3 className="font-semibold">{post.title}</h3>
                     <p className="text-sm text-muted-foreground">{post.text.substring(0, 50)}...</p>
                   </div>
-                  <Button
-                    variant="destructive"
-                    size="sm"
-                    onClick={() => handleDelete(post.id || 0)}
-                    disabled={deleteLoading}
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleEdit(post)}
+                    >
+                      <Edit2 className="w-4 h-4" />
+                    </Button>
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => handleDelete(post.id || 0)}
+                      disabled={deleteLoading}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                    </div>
                 </div>
               ))}
             </div>
@@ -202,6 +237,7 @@ function StoriesManagement() {
   const { createStory, loading: createLoading } = useCreateSuccessStory()
   const { updateStory, loading: updateLoading } = useUpdateSuccessStory()
   const { deleteStory, loading: deleteLoading } = useDeleteSuccessStory()
+  const [editingId, setEditingId] = useState<number | null>(null)
   const [formData, setFormData] = useState({ petName: "", ownerName: "", text: "", date: "", petBreed: "" })
   const [uploadedImages, setUploadedImages] = useState<File[]>([])
   const [message, setMessage] = useState("")
@@ -212,6 +248,17 @@ function StoriesManagement() {
       return
     }
     try {
+      if (editingId) {
+        await updateStory(editingId, {
+          petName: formData.petName,
+          ownerName: formData.ownerName,
+          text: formData.text,
+          date: formData.date,
+          petBreed: formData.petBreed,
+        }, uploadedImages)
+        setMessage("Story updated successfully")
+        setEditingId(null)
+      } else {
       await createStory({
         petName: formData.petName,
         ownerName: formData.ownerName,
@@ -219,12 +266,13 @@ function StoriesManagement() {
         date: formData.date,
         petBreed: formData.petBreed,
       }, uploadedImages )
+      setMessage("Historia criada com sucesso")
+      }
       setFormData({ petName: "", ownerName: "", text: "", date: "", petBreed: "" })
       setUploadedImages([])
-      setMessage("Historia criada com sucesso")
       setTimeout(() => setMessage(""), 3000)
     } catch (err) {
-      setMessage("Não conseguiu criar a historia")
+      setMessage("Não conseguiu salvar a historia")
     }
   }
 
@@ -240,6 +288,11 @@ function StoriesManagement() {
     }
   }
 
+  const handleEdit = (story: any) => {
+    setEditingId(story.id)
+    setFormData({ petName: story.petName, ownerName: story.ownerName, text: story.text, date: story.date, petBreed: story.petBreed })
+  }
+
   return (
     <div className="space-y-6 mt-6">
       {message && (
@@ -252,7 +305,7 @@ function StoriesManagement() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Plus className="w-5 h-5" />
-            Criar nova história
+            {editingId ? "Editar história" : "Criar nova história"}
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -307,9 +360,20 @@ function StoriesManagement() {
             />
           </div>
           <ImageUpload onImagesChange={setUploadedImages} maxImages={5} />
-          <Button onClick={handleCreate} disabled={createLoading}>
-            {createLoading ? "Creating..." : "Create Story"}
-          </Button>
+          <div className="flex gap-2">
+            <Button onClick={handleCreate} disabled={createLoading}>
+              {createLoading ? "Saving..." : editingId ? "Update Story" : "Create Story"}
+            </Button>
+            {editingId && (
+              <Button variant="outline" onClick={() => {
+                setEditingId(null)
+                setFormData({ petName: "", ownerName: "", text: "", date: "", petBreed: "" })
+                setUploadedImages([])
+              }}>
+                Cancel
+            </Button>
+            )}
+          </div>
         </CardContent>
       </Card>
 
@@ -330,14 +394,23 @@ function StoriesManagement() {
                     <h3 className="font-semibold">{story.petName}</h3>
                     <p className="text-sm text-muted-foreground">Dono: {story.ownerName}</p>
                   </div>
-                  <Button
-                    variant="destructive"
-                    size="sm"
-                    onClick={() => handleDelete(story.id || 0)}
-                    disabled={deleteLoading}
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleEdit(story)}
+                    >
+                      <Edit2 className="w-4 h-4" />
+                    </Button>
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => handleDelete(story.id || 0)}
+                      disabled={deleteLoading}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -351,7 +424,6 @@ function StoriesManagement() {
 function UsersManagement() {
   const { users, loading, error } = useUsers()
   const { createUser, loading: createLoading } = useCreateUser()
-  const { updateUser, loading: updateLoading } = useUpdateUser()
   const { deleteUser, loading: deleteLoading } = useDeleteUser()
   const [formData, setFormData] = useState({ name: "", email: "", cpf: "", phone: "", password: "" })
   const [message, setMessage] = useState("")
@@ -502,6 +574,7 @@ function PartnersManagement() {
   const { createPartner, loading: createLoading } = useCreatePartner()
   const { updatePartner, loading: updateLoading } = useUpdatePartner()
   const { deletePartner, loading: deleteLoading } = useDeletePartner()
+  const [editingId, setEditingId] = useState<number | null>(null)
   const [formData, setFormData] = useState({ name: "", address: "", phone: "", email: "", siteUrl: "" })
   const [message, setMessage] = useState("")
 
@@ -511,6 +584,17 @@ function PartnersManagement() {
       return
     }
     try {
+      if (editingId) {
+        await updatePartner(editingId, {
+          name: formData.name,
+          address: formData.address,
+          phone: formData.phone,
+          email: formData.email,
+          siteUrl: formData.siteUrl,
+        })
+        setMessage("Partner updated successfully")
+        setEditingId(null)
+      } else {
       await createPartner({
         name: formData.name,
         address: formData.address,
@@ -518,6 +602,8 @@ function PartnersManagement() {
         email: formData.email,
         siteUrl: formData.siteUrl,
       })
+        setMessage("Partner created successfully")
+      }
       setFormData({ name: "", address: "", phone: "", email: "", siteUrl: "" })
       setMessage("Partner created successfully")
       setTimeout(() => setMessage(""), 3000)
@@ -538,6 +624,11 @@ function PartnersManagement() {
     }
   }
 
+  const handleEdit = (partner: any) => {
+    setEditingId(partner.id)
+    setFormData({ name: partner.name, address: partner.address, phone: partner.phone, email: partner.email || "", siteUrl: partner.siteUrl || "" })
+  }
+
   return (
     <div className="space-y-6 mt-6">
       {message && (
@@ -550,7 +641,7 @@ function PartnersManagement() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Plus className="w-5 h-5" />
-            Create New Partner
+            {editingId ? "Edit Partner" : "Create New Partner"}
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -602,9 +693,19 @@ function PartnersManagement() {
               placeholder="Website URL"
             />
           </div>
+          <div className="flex gap-2">
           <Button onClick={handleCreate} disabled={createLoading}>
-            {createLoading ? "Creating..." : "Create Partner"}
+            {createLoading ? "Saving..." : editingId ? "Update Partner" : "Create Partner"}
+            </Button>
+            {editingId && (
+              <Button variant="outline" onClick={() => {
+                setEditingId(null)
+                setFormData({ name: "", address: "", phone: "", email: "", siteUrl: "" })
+              }}>
+                Cancel
           </Button>
+            )}
+        </div>
         </CardContent>
       </Card>
 
@@ -625,6 +726,14 @@ function PartnersManagement() {
                     <h3 className="font-semibold">{partner.name}</h3>
                     <p className="text-sm text-muted-foreground">{partner.address}</p>
                   </div>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleEdit(partner)}
+                    >
+                      <Edit2 className="w-4 h-4" />
+                    </Button>
                   <Button
                     variant="destructive"
                     size="sm"
@@ -633,6 +742,7 @@ function PartnersManagement() {
                   >
                     <Trash2 className="w-4 h-4" />
                   </Button>
+                  </div>
                 </div>
               ))}
             </div>

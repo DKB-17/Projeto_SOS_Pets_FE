@@ -9,6 +9,7 @@ import Link from "next/link"
 import { SuccessStoryRequestDto, SuccessStoryResponseDto } from "@/api/types/success-story.type"
 import { useState } from "react"
 import { StoryModal } from "@/components/story-modal"
+import { Footer } from "@/components/footer"
 
 export default function SuccessStoriesPage() {
   const { stories, loading, error } = useSuccessStories()
@@ -93,6 +94,8 @@ export default function SuccessStoriesPage() {
         </div>
       </section>
 
+      <Footer />
+
       {/* Story Modal */}
       {selectedStory && (
         <StoryModal
@@ -104,7 +107,7 @@ export default function SuccessStoriesPage() {
           }}
         />
       )}
-
+      
     </div>
   )
 }

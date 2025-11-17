@@ -1,11 +1,17 @@
 import axios, { type AxiosInstance } from "axios"
 import type { PostRequestDto } from "../types/post.type"
+import { getAuthToken } from "../utils/auth"
 
 class PostService {
   private api: AxiosInstance
 
   constructor(baseURL = "http://localhost:8080") {
     this.api = axios.create({ baseURL })
+  }
+
+  private getHeaders() {
+    const token = getAuthToken()    
+    return token ? { Authorization: `Bearer ${token}` } : {}
   }
 
   async getPosts(): Promise<PostRequestDto[]> {
@@ -23,22 +29,23 @@ class PostService {
 
     if (images && images.length > 0) {
       const formData = new FormData()
-      formData.append("title", data.title)
-      formData.append("text", data.text)
-      formData.append("category", JSON.stringify(data.category))
-      if (data.date) formData.append("date", data.date)
-      
+      formData.append("post", JSON.stringify(data))
+  
       images.forEach((image) => {
-        formData.append("images", image)
+        formData.append("files", image)
       })
 
       const response = await this.api.post<PostRequestDto>("/posts", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: { "Content-Type": "multipart/form-data",
+                    ...this.getHeaders()
+        },
       })
       return response.data
     }
 
-    const response = await this.api.post<PostRequestDto>("/posts", data)
+    const response = await this.api.post<PostRequestDto>("/posts", data, {
+      headers: this.getHeaders()
+    })
     return response.data
   }
 
@@ -46,22 +53,23 @@ class PostService {
 
     if (images && images.length > 0) {
       const formData = new FormData()
-      formData.append("title", data.title)
-      formData.append("text", data.text)
-      formData.append("category", JSON.stringify(data.category))
-      if (data.date) formData.append("date", data.date)
+      formData.append("post", JSON.stringify(data))
       
       images.forEach((image) => {
-        formData.append("images", image)
+        formData.append("files", image)
       })
 
       const response = await this.api.put<PostRequestDto>(`/posts/${id}`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: { "Content-Type": "multipart/form-data",
+          ...this.getHeaders()
+         },
       })
       return response.data
     }
 
-    const response = await this.api.put<PostRequestDto>(`/posts/${id}`, data)
+    const response = await this.api.put<PostRequestDto>(`/posts/${id}`, data, {
+      headers: this.getHeaders()
+    })
     return response.data
   }
 

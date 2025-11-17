@@ -84,11 +84,11 @@ export function useUpdatePost() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<Error | null>(null)
 
-  const updatePost = async (id: number, data: PostRequestDto) => {
+  const updatePost = async (id: number, data: PostRequestDto, images?: File[]) => {
     try {
       setLoading(true)
       setError(null)
-      const updatedPost = await postService.updatePost(id, data)
+      const updatedPost = await postService.updatePost(id, data, images)
       return updatedPost
     } catch (err) {
       const error = err instanceof Error ? err : new Error("Failed to update post")

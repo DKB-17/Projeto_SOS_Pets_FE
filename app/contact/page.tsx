@@ -5,6 +5,7 @@ import { VetPartners } from "@/components/vet-partners"
 import { Card, CardContent } from "@/components/ui/card"
 import { Mail, Phone, MapPin, Clock, Facebook, Instagram } from "lucide-react"
 import { usePartners } from "@/api/hooks/usePartners"
+import { Footer } from "@/components/footer"
 
 
 export default function ContactPage() {
@@ -158,6 +159,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   )
 }

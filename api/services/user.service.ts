@@ -1,4 +1,5 @@
 import axios, { type AxiosInstance } from "axios"
+import { getAuthToken } from "../utils/auth"
 import type { UserRequestDto, UserResponseDto } from "../types/user.type"
 
 class UserService {
@@ -8,13 +9,22 @@ class UserService {
     this.api = axios.create({ baseURL })
   }
 
+  private getHeaders() {
+    const token = getAuthToken()
+    return token ? { Authorization: `Bearer ${token}` } : {}
+  }
+
   async getUsers(): Promise<UserResponseDto[]> {
-    const response = await this.api.get<UserResponseDto[]>("/users")
+    const response = await this.api.get<UserResponseDto[]>("/users", {
+      headers: this.getHeaders()
+    })
     return response.data
   }
 
   async getUserById(id: number): Promise<UserResponseDto> {
-    const response = await this.api.get<UserResponseDto>(`/users/${id}`)
+    const response = await this.api.get<UserResponseDto>(`/users/${id}`,{
+      headers: this.getHeaders()
+    })
     return response.data
   }
 
@@ -23,10 +33,6 @@ class UserService {
     return response.data
   }
 
-  async updateUser(id: number, data: UserRequestDto): Promise<UserResponseDto> {
-    const response = await this.api.put<UserResponseDto>(`/users/${id}`, data)
-    return response.data
-  }
 
   async deleteUser(id: number): Promise<string> {
     const response = await this.api.delete<string>(`/users/${id}`)

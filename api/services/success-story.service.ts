@@ -1,11 +1,17 @@
 import axios, { type AxiosInstance } from "axios"
 import type { SuccessStoryRequestDto, SuccessStoryResponseDto } from "../types/success-story.type"
+import { getAuthToken } from "../utils/auth"
 
 class SuccessStoryService {
   private api: AxiosInstance
 
   constructor(baseURL = "http://localhost:8080") {
     this.api = axios.create({ baseURL })
+  }
+
+  private getHeaders() {
+      const token = getAuthToken()    
+      return token ? { Authorization: `Bearer ${token}` } : {}
   }
 
   async getSuccessStories(): Promise<SuccessStoryResponseDto[]> {
@@ -29,16 +35,20 @@ class SuccessStoryService {
       if (data.date) formData.append("date", data.date)
       
       images.forEach((image) => {
-        formData.append("images", image)
+        formData.append("files", image)
       })
 
       const response = await this.api.post<SuccessStoryRequestDto>("/successStories", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: { "Content-Type": "multipart/form-data",
+                    ...this.getHeaders()
+        },
       })
       return response.data
     }
 
-    const response = await this.api.post<SuccessStoryRequestDto>("/successStories", data)
+    const response = await this.api.post<SuccessStoryRequestDto>("/successStories", data, {
+      headers: this.getHeaders()
+    })
     return response.data
   }
 
@@ -53,7 +63,7 @@ class SuccessStoryService {
       if (data.date) formData.append("date", data.date)
       
       images.forEach((image) => {
-        formData.append("images", image)
+        formData.append("files", image)
       })
 
       const response = await this.api.put<SuccessStoryRequestDto>(`/successStories/${id}`, formData, {
@@ -62,7 +72,9 @@ class SuccessStoryService {
       return response.data
     }
 
-    const response = await this.api.put<SuccessStoryRequestDto>(`/successStories/${id}`, data)
+    const response = await this.api.put<SuccessStoryRequestDto>(`/successStories/${id}`, data, {
+      headers: this.getHeaders()
+    })
     return response.data
   }
 

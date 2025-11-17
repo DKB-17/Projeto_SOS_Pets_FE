@@ -84,11 +84,11 @@ export function useUpdateSuccessStory() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<Error | null>(null)
 
-  const updateStory = async (id: number, data: SuccessStoryRequestDto) => {
+  const updateStory = async (id: number, data: SuccessStoryRequestDto, images?: File[]) => {
     try {
       setLoading(true)
       setError(null)
-      const updatedStory = await successStoryService.updateSuccessStory(id, data)
+      const updatedStory = await successStoryService.updateSuccessStory(id, data, images)
       return updatedStory
     } catch (err) {
       const error = err instanceof Error ? err : new Error("Failed to update story")
