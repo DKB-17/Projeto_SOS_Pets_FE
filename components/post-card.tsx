@@ -15,7 +15,7 @@ export function PostCard({id, title, text, date, category, images }: PostRequest
       )}
       <CardHeader>
         <div className="flex items-center justify-between mb-2">
-          <Badge className="bg-teal-600">{category.name}</Badge>
+          <Badge className="bg-[#21A14A]">{category.name}</Badge>
           <div className="flex items-center gap-1 text-xs text-muted-foreground">
             <Calendar className="w-3 h-3" />
             <span>{formatDate(date)}</span>

@@ -77,9 +77,9 @@ export function StoryModal({ story, isOpen, onClose }: StoryModalProps) {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-3xl font-bold text-slate-900 mb-2">{story.petName}</h2>
-              <p className="text-lg text-teal-600 font-semibold">Adotado por {story.ownerName}</p>
+              <p className="text-lg text-[#21A14A] font-semibold">Adotado por {story.ownerName}</p>
             </div>
-            <Badge className="bg-teal-100 text-teal-700">{story.petBreed}</Badge>
+            <Badge className="bg-teal-100 text-[#21A14A]">{story.petBreed}</Badge>
           </div>
 
           <div className="text-sm text-slate-500">

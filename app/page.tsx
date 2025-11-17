@@ -45,7 +45,7 @@ export default function HomePage() {
             </p>
             <div className="flex items-center justify-center gap-4">
               <Link href="/contact">
-              <Button size="lg" className="gap-2 bg-teal-600">
+              <Button size="lg" className="gap-2 bg-[#21A14A]">
                 <Heart className="w-5 h-5" />
                 Doe agora
               </Button>
