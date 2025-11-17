@@ -15,13 +15,17 @@ class PostService {
   }
 
   async getPosts(): Promise<PostRequestDto[]> {
-    const response = await this.api.get<PostRequestDto[]>("/posts")
+    const response = await this.api.get<PostRequestDto[]>("/posts", {
+      headers: this.getHeaders()
+    })
     console.log("Fetched posts:", response.data);
     return response.data
   }
 
   async getPostById(id: number): Promise<PostRequestDto> {
-    const response = await this.api.get<PostRequestDto>(`/posts/${id}`)
+    const response = await this.api.get<PostRequestDto>(`/posts/${id}`, {
+      headers: this.getHeaders()
+    })
     return response.data
   }
 
@@ -36,9 +40,7 @@ class PostService {
       })
 
       const response = await this.api.post<PostRequestDto>("/posts", formData, {
-        headers: { "Content-Type": "multipart/form-data",
-                    ...this.getHeaders()
-        },
+        headers: this.getHeaders(),
       })
       return response.data
     }
@@ -72,7 +74,9 @@ class PostService {
   }
 
   async deletePost(id: number): Promise<string> {
-    const response = await this.api.delete<string>(`/posts/${id}`)
+    const response = await this.api.delete<string>(`/posts/${id}`, {
+      headers: this.getHeaders()
+    })
     return response.data
   }
 }

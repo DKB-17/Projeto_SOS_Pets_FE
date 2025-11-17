@@ -43,7 +43,9 @@ class CategoryService {
   }
 
   async deleteCategory(id: number): Promise<string> {
-    const response = await this.api.delete<string>(`/categories/${id}`)
+    const response = await this.api.delete<string>(`/categories/${id}`, {
+      headers: this.getHeaders()
+    })
     return response.data
   }
 }

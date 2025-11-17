@@ -15,12 +15,16 @@ class SuccessStoryService {
   }
 
   async getSuccessStories(): Promise<SuccessStoryResponseDto[]> {
-    const response = await this.api.get<SuccessStoryResponseDto[]>("/successStories")
+    const response = await this.api.get<SuccessStoryResponseDto[]>("/successStories", {
+      headers: this.getHeaders()
+    })
     return response.data
   }
 
   async getSuccessStoryById(id: number): Promise<SuccessStoryResponseDto> {
-    const response = await this.api.get<SuccessStoryResponseDto>(`/successStories/${id}`)
+    const response = await this.api.get<SuccessStoryResponseDto>(`/successStories/${id}`, {
+      headers: this.getHeaders()
+    })
     return response.data
   }
 
@@ -69,7 +73,9 @@ class SuccessStoryService {
   }
 
   async deleteSuccessStory(id: number): Promise<string> {
-    const response = await this.api.delete<string>(`/successStories/${id}`)
+    const response = await this.api.delete<string>(`/successStories/${id}`, {
+      headers: this.getHeaders()
+    })
     return response.data
   }
 }
