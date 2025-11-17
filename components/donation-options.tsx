@@ -29,7 +29,7 @@ export function DonationOptions() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Heart className="w-5 h-5 text-primary" />
+          <Heart className="w-5 h-5 text-destructive" />
           Faça uma doação
         </CardTitle>
       </CardHeader>

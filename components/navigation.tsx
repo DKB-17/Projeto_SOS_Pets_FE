@@ -9,8 +9,7 @@ import { getAuthToken } from "@/api/utils/auth"
 const navItems = [
   { href: "/", label: "Inicio" },
   { href: "/success-stories", label: "Histórias de sucesso" },
-  { href: "/contact", label: "Contatos e Doações" },
-  { href: "/login", label: "Login" },
+  { href: "/contact", label: "Contatos e Doações" }
 ]
 
 const authNavItems = [
@@ -18,7 +17,7 @@ const authNavItems = [
   { href: "/success-stories", label: "Histórias de sucesso " },
   { href: "/contact", label: "Contatos e Doações" },
   { href: "/management", label: "Gerenciamento" },
-  { href: "/login", label: "Logout" },
+  { href: "/login", label: "Sair" },
 ]
 
 export function Navigation() {

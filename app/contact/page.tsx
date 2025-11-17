@@ -4,8 +4,11 @@ import { DonationOptions } from "@/components/donation-options"
 import { VetPartners } from "@/components/vet-partners"
 import { Card, CardContent } from "@/components/ui/card"
 import { Mail, Phone, MapPin, Clock, Facebook, Instagram } from "lucide-react"
+import { usePartners } from "@/api/hooks/usePartners"
+
 
 export default function ContactPage() {
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -30,8 +33,8 @@ export default function ContactPage() {
               <Card>
                 <CardContent className="pt-6">
                   <div className="flex flex-col items-center text-center space-y-2">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Mail className="w-6 h-6 text-primary" />
+                    <div className="w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center">
+                      <Mail className="w-6 h-6 text-destructive" />
                     </div>
                     <h3 className="font-semibold">Email</h3>
                     <p className="text-sm text-muted-foreground">https://www.sospetsassis.org</p>
@@ -41,8 +44,8 @@ export default function ContactPage() {
               <Card>
                 <CardContent className="pt-6">
                   <div className="flex flex-col items-center text-center space-y-2">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Phone className="w-6 h-6 text-primary" />
+                    <div className="w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center">
+                      <Phone className="w-6 h-6 text-destructive" />
                     </div>
                     <h3 className="font-semibold">Telefone</h3>
                     <p className="text-sm text-muted-foreground">(18) 99999-9999</p>
@@ -52,8 +55,8 @@ export default function ContactPage() {
               <Card>
                 <CardContent className="pt-6">
                   <div className="flex flex-col items-center text-center space-y-2">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                      <MapPin className="w-6 h-6 text-primary" />
+                    <div className="w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center">
+                      <MapPin className="w-6 h-6 text-destructive" />
                     </div>
                     <h3 className="font-semibold">Endereço</h3>
                     <p className="text-sm text-muted-foreground">Assis/SP</p>
@@ -63,8 +66,8 @@ export default function ContactPage() {
               <Card>
                 <CardContent className="pt-6">
                   <div className="flex flex-col items-center text-center space-y-2">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Clock className="w-6 h-6 text-primary" />
+                    <div className="w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center">
+                      <Clock className="w-6 h-6 text-destructive" />
                     </div>
                     <h3 className="font-semibold">Funcionamento</h3>
                     <p className="text-sm text-muted-foreground">Segunda á Sexta: 9h-18h</p>
@@ -90,7 +93,7 @@ export default function ContactPage() {
 
             {/* Vet Partners */}
             <div className="mb-12">
-              <VetPartners />
+              <VetPartners/>
             </div>
 
             {/* Social Media & Additional Info */}

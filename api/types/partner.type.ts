@@ -20,4 +20,5 @@ export interface PartnerResponseDto {
   phone: string
   email?: string
   siteUrl?: string
+  specialties?: Specialty[]
 }

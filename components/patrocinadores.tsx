@@ -11,6 +11,12 @@ export function PatrocinadoresSection() {
                 '/carrocel2.jpg?height=500&width=800',
                 '/carrocel3.jpg?height=500&width=800',
                 '/carrocel4.jpg?height=500&width=800',
+                '/carrocel5.jpg?height=500&width=800',
+                '/carrocel6.jpg?height=500&width=800',
+                '/carrocel7.jpg?height=500&width=800',
+                '/carrocel8.jpg?height=500&width=800',
+                '/carrocel9.jpg?height=500&width=800',
+                '/carrocel10.jpg?height=500&width=800',
               ]}
               height={500}
               autoplay={true}

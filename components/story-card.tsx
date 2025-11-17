@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Heart, Calendar } from "lucide-react"
+import { formatDate } from "@/api/utils/format-date"
 
 interface StoryCardProps {
   petName: string
@@ -24,7 +25,7 @@ export function StoryCard({ petName, ownerName, story, adoptionDate, image, vide
           <img src={image || "/placeholder.svg"} alt={petName} className="w-full h-full object-cover" />
         )}
         <div className="absolute top-3 right-3">
-          <Badge variant="secondary" className="bg-card/90 backdrop-blur-sm">
+          <Badge className="bg-card/90 bg-primary">
             {petType}
           </Badge>
         </div>
@@ -37,7 +38,7 @@ export function StoryCard({ petName, ownerName, story, adoptionDate, image, vide
           </div>
           <div className="flex items-center gap-1 text-xs text-muted-foreground">
             <Calendar className="w-3 h-3" />
-            <span>{adoptionDate}</span>
+            <span>{formatDate(adoptionDate)}</span>
           </div>
         </div>
         <CardTitle className="text-lg">Adotado por {ownerName}</CardTitle>

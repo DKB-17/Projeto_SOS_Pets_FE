@@ -9,9 +9,24 @@ import { OngStory } from "@/components/ong-story"
 import { PatrocinadoresSection } from "@/components/patrocinadores"
 import { Footer } from "@/components/footer"
 import Link from "next/link"
+import { useState } from "react"
+import { PostRequestDto } from "@/api/types/post.type"
+import { PostModal } from "@/components/post-modal"
 
 export default function HomePage() {
   const { posts, loading, error } = usePosts()
+   const [selectedPost, setSelectedPost] = useState<PostRequestDto | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handlePostClick = (post: PostRequestDto) => {
+    setSelectedPost(post)
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setSelectedPost(null)
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -55,33 +70,45 @@ export default function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {loading ? (
                 <div className="col-span-full text-center py-8">
-                  <p className="text-muted-foreground">Loading posts...</p>
+                  <p className="text-muted-foreground">Carregando posts...</p>
                 </div>
               ) : error ? (
                 <div className="col-span-full text-center py-8">
-                  <p className="text-red-500">Error loading posts. Please try again later.</p>
+                  <p className="text-red-500">Erro ao carregar os posts, tente mais tarde.</p>
                 </div>
               ) : posts.length === 0 ? (
                 <div className="col-span-full text-center py-8">
-                  <p className="text-muted-foreground">No posts available yet.</p>
+                  <p className="text-muted-foreground">Nenhum post ainda foi publicado.</p>
                 </div>
               ) : (
                 posts.map((post) => (
-                  <PostCard
+                  <div
                     key={post.id}
-                    id={post.id ? post.id : 0}
+                    onClick={() => handlePostClick(post)}
+                    className="cursor-pointer"
+                  >
+                  <PostCard
                     title={post.title}
                     text={post.text}
                     date={post.date || new Date().toLocaleDateString()}
                     category={post.category}
                     images={post.images ? post.images : undefined}
                   />
+                  </div>
                 ))
               )}
             </div>
           </div>
         </div>
       </section>
+
+      {selectedPost && (
+        <PostModal
+          post={selectedPost}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
+      )}
 
       <Footer/>
     </div>

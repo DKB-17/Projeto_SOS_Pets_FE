@@ -5,6 +5,7 @@ import { StoryCard } from "@/components/story-card"
 import { Button } from "@/components/ui/button"
 import { Heart } from "lucide-react"
 import { useSuccessStories } from "@/api/hooks/useSuccessStories"
+import Link from "next/link"
 
 export default function SuccessStoriesPage() {
   const { stories, loading, error } = useSuccessStories()
@@ -36,15 +37,15 @@ export default function SuccessStoriesPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {loading ? (
                 <div className="col-span-full text-center py-8">
-                  <p className="text-muted-foreground">Loading stories...</p>
+                  <p className="text-muted-foreground">Carregando historias...</p>
                 </div>
               ) : error ? (
                 <div className="col-span-full text-center py-8">
-                  <p className="text-red-500">Error loading stories. Please try again later.</p>
+                  <p className="text-red-500">Erro ao carregar historias. Por favor tente mais tarde.</p>
                 </div>
               ) : stories.length === 0 ? (
                 <div className="col-span-full text-center py-8">
-                  <p className="text-muted-foreground">No success stories available yet.</p>
+                  <p className="text-muted-foreground">Nenhuma historia de sucesso ainda.</p>
                 </div>
               ) : (
                 stories.map((story) => (
@@ -68,12 +69,12 @@ export default function SuccessStoriesPage() {
                 Se você adotou um animal de estimação por meio de nossa organização, gostaríamos 
                 muito de ouvir sobre sua jornada e compartilhá-la com nossa comunidade.
               </p>
-              <a href="/contact">
+              <Link href="/contact">
                 <Button size="lg" className="gap-2">
                   <Heart className="w-5 h-5" />
                   Envie sua história
                 </Button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

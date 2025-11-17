@@ -9,12 +9,3 @@ export interface PostRequestDto {
   date?: string
   images?: Image[]
 }
-
-export interface PostResponseDto {
-  id: number
-  title: string
-  text: string
-  category: CategoryRequestDto
-  date?: string
-  images?: Image[]
-}
